@@ -76,7 +76,26 @@ class EventController extends AbstractController
         return $this->render('create/index.html.twig', compact('createEventForm'));
 
     }
+    #[Route('/participate', name: '_participate')]
+    public function participate(
+        EntityManagerInterface $entityManager,
+        Event $event
+    ): Response
+    {
 
+        $entityManager->persist($event);
+        $entityManager->flush();
+
+        $this->addFlash('success', $event->getName() . 'has been' .
+
+        $event-> getNbMaxInsc()? 'added' : 'removed' . 'from the event');
+
+        return $this->render(
+            'event_detail/index.html.twig',
+            compact('event')
+
+        );
+    }
 
 
 
