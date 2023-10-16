@@ -37,7 +37,7 @@ class UserProfileController extends AbstractController
 
 
         return $this->render(
-            'home/profil.html.twig',
+            'profil/profil.html.twig',
             compact('modifyProfileForm')
         );
     }

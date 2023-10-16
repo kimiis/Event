@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\User;
+use App\Form\CanceledFormType;
 use App\Form\CreateEventFormType;
 use App\Repository\EventRepository;
+use App\Repository\StatusRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -24,10 +28,15 @@ class EventController extends AbstractController
 
     #[Route('/listeEvents', name: 'app_listeEvents')]
     public function listeEvents(
-        EventRepository $sortieRepository
+        EventRepository $eventRepository,
+        UserRepository  $userRepository,
+        Security        $security,
+
+
     ): Response
     {
-        $events = $sortieRepository->findBy(
+        $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
+        $events = $eventRepository->findBy(
 
             [], //WHERE
             [], //ORDER BY
@@ -35,7 +44,7 @@ class EventController extends AbstractController
             0 //OFFSET -> pagination*/
 
         );
-        return $this->render('listeEvents.html.twig', compact('events'));
+        return $this->render('listeEvents.html.twig', compact('events', 'user'));
     }
 
     #[Route('event/detail/{event}', name: '_detail')]
@@ -52,14 +61,19 @@ class EventController extends AbstractController
     public function create(
         Request                $request,
         EntityManagerInterface $entityManager,
-        Security               $security
+        Security               $security,
+        UserRepository         $userRepository
     ): Response
     {
+        $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
 
         $create = new Event();
+        $create->setOrganizer($user);
+
 //        set le select à aujourd'hui
-        $create->setDateD(new \DateTime());
-        $create->setLimiteDate(new \DateTime());
+//        $create->setDateD(new \DateTime());
+//        $create->setLimiteDate(new \DateTime());
+
         $createEventForm = $this->createForm(CreateEventFormType::class, $create);
         $createEventForm->handleRequest($request);
 
@@ -68,7 +82,6 @@ class EventController extends AbstractController
 
             $entityManager->persist($create);
             $entityManager->flush();
-            $this->addFlash('success', 'The event has been successfully created and released.');
 
             return $this->redirectToRoute('app_listeEvents', [], Response::HTTP_SEE_OTHER);
 
@@ -76,27 +89,91 @@ class EventController extends AbstractController
         return $this->render('create/index.html.twig', compact('createEventForm'));
 
     }
-    #[Route('/participate', name: '_participate')]
-    public function participate(
+
+
+    #[Route('/registerEvent/{event}', name: '_registerForEvent')]
+    public function registerForEvent(
         EntityManagerInterface $entityManager,
-        Event $event
+//        EventRepository        $eventRepository,
+        Event                  $event,
+        UserRepository         $userRepository,
+        Security               $security
+
     ): Response
     {
+
+//        user co
+        $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
+
+//add
+
+        if (!$event) {
+            throw $this->createNotFoundException('Error 404: page not found');
+//si organisateur essaye de participer
+        } else if ($event->getOrganizer() === $user) {
+
+            throw $this->createNotFoundException("Error 450: Blocked by Windows Parental Controls");
+
+// Si mon nb maxInsc >= à ma liste de user inscrit de l'event alors
+        } else if ($event->getNbMaxInsc() <= $event->getUsers()->count() && !$event->getUsers()->contains($user)) {
+
+            throw $this->createNotFoundException("Error 200: it's ok baby~");
+
+// si status != open
+        } else if ($event->getStatus()->getName() !== "Open") {
+
+            throw $this->createNotFoundException("Error 410: Gone");
+
+//         si la date limite est depassé
+        } else if ($event->getLimiteDate() < new \DateTime()) {
+
+            throw $this->createNotFoundException("It's too late to apologize, yeaaaaah yeah yeah ~");
+
+//            si l'user n'est pas sur la liste des user de l'event alors
+        } else if (!$event->getUsers()->contains($user)) {
+
+            // Ajoutez l'utilisateur à la liste des participants de l'événement
+            $event->addUser($user);
+
+        } else {
+            $event->removeUser($user);
+        }
 
         $entityManager->persist($event);
         $entityManager->flush();
 
-        $this->addFlash('success', $event->getName() . 'has been' .
+        return $this->redirectToRoute('app_listeEvents');
 
-        $event-> getNbMaxInsc()? 'added' : 'removed' . 'from the event');
-
-        return $this->render(
-            'event_detail/index.html.twig',
-            compact('event')
-
-        );
     }
 
-
+//    #[Route('/canceled/{event}/', name: 'app_eventCanceled')]
+//    public function eventCanceled(
+//        EntityManagerInterface $entityManager,
+//        StatusRepository       $statusRepository,
+//        Request                $request,
+//        Event                  $event
+//
+//    ): Response
+//    {
+//        $canceled = $statusRepository->findOneBy(['name' => 'Annulé']);
+//        $event->setStatus($canceled);
+//
+//        $canceledForm = $this->createForm(CanceledFormType::class, $canceled);
+//        $canceledForm->handleRequest($request);
+//
+//        if ($canceledForm->isSubmitted() && $canceledForm->isValid()) {
+//
+//            $cancellationReason = $canceledForm->get('cancellationReason')->getData();
+//            $event->setCancellationReason($cancellationReason);
+//
+//            $entityManager->persist($event);
+//            $entityManager->flush();
+//
+//            return $this->redirectToRoute('app_listeEvents', [], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->redirectToRoute('app_listeEvents', compact('canceledForm'));
+//        }
+//
 
 }

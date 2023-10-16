@@ -4,13 +4,15 @@
     {% block body %}
 
         <div>
-            <p>Event : {{ event.name }}</p>
+            <p>Event : {{ event.title }}</p>
             <p> Informations : {{ event.infosEvent }}</p>
             <p>Address :{{ event.address }}</p>
             <p>{{ event.nbMaxInsc}} persons max</p>
             <p> Time of the event: {{ event.time | date ('H:i')}} </p>
             <p> Begin : {{ event.dateD | date }}</p>
             <p> Limit of registration : {{ event.limiteDate | date }}</p>
+            <p> Status : {{ event.status.name }}</p>
+            <p> Organizer : {{ event.organizer.pseudo }}</p>
 
 
         </div>
