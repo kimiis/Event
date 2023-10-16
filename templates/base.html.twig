@@ -1,52 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+    {% endblock %}
 
-        {% block javascripts %}
-        {% endblock %}
-    </head>
-    <body>
-    <header>
-        {#    si je créer le %block header c'est pour le faire que dans 1 et une seule page #}
+    {% block javascripts %}
+    {% endblock %}
+</head>
+<body>
 
-        <div class="titre">
-            <h1>Eni-Sortie</h1>
-        </div>
+<header>
+    {% block header %}
+        <nav>
+            <li><a href="{{ path('_home') }}">Home</a></li>
 
-        <div class="menuNav">
-            <nav class="menu">
-                <ul>
-                    <li>
-                        <a href="{{ path('app_home') }}" class="nav">Home</a>
-                        <a href="{{ path('app_listeEvents') }}" class="nav">Events</a>
-                        <a href="{{ path('app_create') }}" class="nav">Create event</a>
-
-
-                        {#                        {% if app.user %}#}
-                        {#                            <p> Hi {{ app.user.username }}</p>#}
-                        {#                            <a href="{{ path('wishmain_createWish') }}" class="nav">Create wish</a>#}
-                        {#                            <a href="{{ path('app_logout') }}" class="nav">Logout</a>#}
-                        {#                        {% endif %}#}
-                        {#                        {% if not app.user %}#}
-
-                        {#                            <a href="{{ path('app_register') }}" class="nav">Registration</a>#}
-                        {#                            <a href="{{ path('app_login') }}" class="nav">Login</a>#}
-                        {#                        {% endif %}#}
-
-                    </li>
-
-                </ul>
-            </nav>
-
-        </div>
+            {% if app.user %}
+                <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                <li><a href="{{ path('_profil') }}" >Profil</a></li>
+            {% endif %}
+            {% if not app.user %}
+                <li><a href="{{ path('app_register') }}">S'enregistrer</a></li>
+                <li><a href="{{ path('app_login') }}">Login</a></li>
+            {% endif %}
 
 
-    </header>
-        {% block body %}{% endblock %}
-    </body>
+        </nav>
+    {% endblock %}
+</header>
+
+<main>
+    {% block body %}{% endblock %}
+</main>
+
+<footer>
+    {% block footer %}{% endblock %}
+</footer>
+
+</body>
 </html>
