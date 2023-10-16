@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} | Détail {% endblock %}
+
+    {% block body %}
+
+        <div>
+            <p>Event : {{ event.name }}</p>
+            <p> Informations : {{ event.infosEvent }}</p>
+            <p>Address :{{ event.address }}</p>
+            <p>{{ event.nbMaxInsc}} persons max</p>
+            <p> Time of the event: {{ event.time | date ('H:i')}} </p>
+            <p> Begin : {{ event.dateD | date }}</p>
+            <p> Limit of registration : {{ event.limiteDate | date }}</p>
+
+
+        </div>
+    {% endblock %}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+    <header>
+        {#    si je créer le %block header c'est pour le faire que dans 1 et une seule page #}
+
+        <div class="titre">
+            <h1>Eni-Sortie</h1>
+        </div>
+
+        <div class="menuNav">
+            <nav class="menu">
+                <ul>
+                    <li>
+                        <a href="{{ path('app_home') }}" class="nav">Home</a>
+                        <a href="{{ path('app_listeEvents') }}" class="nav">Events</a>
+                        <a href="{{ path('app_create') }}" class="nav">Create event</a>
+
+
+                        {#                        {% if app.user %}#}
+                        {#                            <p> Hi {{ app.user.username }}</p>#}
+                        {#                            <a href="{{ path('wishmain_createWish') }}" class="nav">Create wish</a>#}
+                        {#                            <a href="{{ path('app_logout') }}" class="nav">Logout</a>#}
+                        {#                        {% endif %}#}
+                        {#                        {% if not app.user %}#}
+
+                        {#                            <a href="{{ path('app_register') }}" class="nav">Registration</a>#}
+                        {#                            <a href="{{ path('app_login') }}" class="nav">Login</a>#}
+                        {#                        {% endif %}#}
+
+                    </li>
+
+                </ul>
+            </nav>
+
+        </div>
+
+
+    </header>
+        {% block body %}{% endblock %}
+    </body>
+</html>

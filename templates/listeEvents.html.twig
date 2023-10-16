@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    <h1>Liste of events</h1>
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <p> page liste </p>
+        {% for event in events %}
+            <li>
+                <a href="{{ path('_detail',  {'event': event.id}) }}"> {{ event.name }} </a>
+                {#                <a href="{{ path('wishapp_wishDelete',  {'sortie': sortie.id}) }}">#}
+                {#                    <input type="button" value="delete">#}
+                {#                </a>#}
+            </li>
+        {% endfor %}
+    </div>
+{% endblock %}
