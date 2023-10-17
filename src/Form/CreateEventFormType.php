@@ -20,16 +20,15 @@ class CreateEventFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, [
+
+            ->add('title', null, [
                 "label" => "Name of the event : "
             ])
-
-            ->add('campus', EntityType::class,[
+            ->add('campus', EntityType::class, [
                 "class" => Campus::class,
-                "choice_label"=>"name",
+                "choice_label" => "name",
                 "label" => "Which campus ? : ",
             ])
-
             ->add('dateD', null, [
                 "label" => "When will it begin? : ",
                 'widget' => 'single_text',
@@ -51,18 +50,15 @@ class CreateEventFormType extends AbstractType
                 "label" => " Infomations: ",
 
             ])
-
-            ->add('address',TextType::class,[
-                "label"=> "address"
-            ] )
-
-            ->add('name', EntityType::class, [
+            ->add('address', TextType::class, [
+                "label" => "address"
+            ])
+            ->add('status', EntityType::class, [
                 "class" => Status::class,
 //                C'est ce qui va se mettre dans ton <select><option>
                 "choice_label" => 'name',
                 "label" => " Status: ",
             ])
-
             ->add('create', SubmitType::class, [
             ]);
     }

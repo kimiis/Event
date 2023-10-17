@@ -6,13 +6,39 @@
 {% block body %}
     <div class="content">
         <p> page liste </p>
+
         {% for event in events %}
             <li>
-                <a href="{{ path('_detail',  {'event': event.id}) }}"> {{ event.name }} </a>
-                {#                <a href="{{ path('wishapp_wishDelete',  {'sortie': sortie.id}) }}">#}
-                {#                    <input type="button" value="delete">#}
-                {#                </a>#}
-            </li>
+                <a href="{{ path('_detail',  {'event': event.id}) }}"> {{ event.title }} </a>
+
+                {% if event.dateD > "now" | date('Y-m-d') and event.Status.Name is same as ("Open") and event.organizer is not same as (user) %}
+
+                    {% if event.Users.contains(user) %}
+
+                        <a href="{{ path('_registerForEvent', {'event': event.id}) }}">
+                            <input type="button" value="Unsubscribe to event"></a>
+
+                    {% endif %}
+
+                    {% if event.NbMaxInsc > event.Users.count and not event.Users.contains(user) and event.LimiteDate > "now"| date('Y-m-d') %}
+
+                        <a href="{{ path('_registerForEvent', {'event': event.id}) }}">
+                            <input type="button" value="Subscribe to event"></a>
+                    {% endif %}
+
+                {% endif %}
+
+                {#                <a href="{{ path('_registerForEvent', {'event': event.id}) }}"> #}
+                {#                    <input type="button" #}
+                {#                           value="{% if not event.Users.contains(user) %} Subscribe to event {% else %} Unsubscribe to event {% endif %}"> #}
+                {#                </a> #}
+
+                {% if event.organizer is same as (user) %}
+                    <a href="{{ path('app_eventCanceled', {'event': event.id}) }}">
+                        <input type="button" value="Cancel event"></a>
+                {% endif %}
+
+                </li>
         {% endfor %}
     </div>
 {% endblock %}

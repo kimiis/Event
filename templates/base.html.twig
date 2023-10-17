@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Eni-Sortie{% endblock %}</title>
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     {% block stylesheets %}
@@ -12,33 +12,44 @@
     {% endblock %}
 </head>
 <body>
-
 <header>
-    {% block header %}
-        <nav>
-            <li><a href="{{ path('_home') }}">Home</a></li>
+    {#    si je créer le %block header c'est pour le faire que dans 1 et une seule page #}
 
-            {% if app.user %}
-                <li><a href="{{ path('app_logout') }}">Logout</a></li>
-                <li><a href="{{ path('_profil') }}" >Profil</a></li>
-            {% endif %}
-            {% if not app.user %}
-                <li><a href="{{ path('app_register') }}">S'enregistrer</a></li>
-                <li><a href="{{ path('app_login') }}">Login</a></li>
-            {% endif %}
+    <div class="titre">
+        <h1>Eni-Sortie</h1>
+    </div>
 
+    <div class="menuNav">
+        <nav class="menu">
+            <ul>
+                <li>
+                    <a href="{{ path('app_home') }}" class="nav">Home</a>
+                    <a href="{{ path('app_listeEvents') }}" class="nav">Events</a>
+                    <a href="{{ path('app_create') }}" class="nav">Create event</a>
 
+                    {% if app.user %}
+
+                        <a href="{{ path('app_logout') }}">Logout</a>
+                        <a href="{{ path('_profil') }}">Profil</a>
+
+                    {% endif %}
+
+                    {% if not app.user %}
+
+                        <a href="{{ path('app_register') }}">S'enregistrer</a>
+                        <a href="{{ path('app_login') }}">Login</a>
+
+                    {% endif %}
+
+                </li>
+
+            </ul>
         </nav>
-    {% endblock %}
+
+    </div>
+
+
 </header>
-
-<main>
-    {% block body %}{% endblock %}
-</main>
-
-<footer>
-    {% block footer %}{% endblock %}
-</footer>
-
+{% block body %}{% endblock %}
 </body>
 </html>

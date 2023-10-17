@@ -18,7 +18,7 @@ class Event
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $title = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\GreaterThan("today UTC")]
@@ -26,9 +26,12 @@ class Event
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\GreaterThan("today UTC")]
+    #[Assert\LessThan(propertyPath:"dateD",message: "trop tard boloss")]
+
     private ?\DateTimeInterface $limiteDate = null;
 
     #[ORM\Column]
+    #[Assert\GreaterThan(1, message: "c'est pas tinder ici" )]
     private ?int $nbMaxInsc = null;
 
     #[ORM\Column(length: 255)]
@@ -40,16 +43,29 @@ class Event
     #[ORM\Column(length: 255)]
     private ?string $Address = null;
 
+
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\GreaterThan("@59", message: "c'est trop court Bernard!")]
     private ?\DateTimeInterface $time = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'participant')]
+    private Collection $users;
+
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $organizer = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $cancellationReason = null;
+
+
     public function __construct()
     {
-
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -57,14 +73,14 @@ class Event
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function gettitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): static
+    public function settitle(string $title): static
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
@@ -165,5 +181,59 @@ class Event
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function getOrganizer(): ?User
+    {
+        return $this->organizer;
+    }
+
+    public function setOrganizer(?User $organizer): static
+    {
+        $this->organizer = $organizer;
+
+        return $this;
+    }
+
+    public function getCancellationReason(): ?string
+    {
+        return $this->cancellationReason;
+    }
+
+    public function setCancellationReason(?string $cancellationReason): static
+    {
+        $this->cancellationReason = $cancellationReason;
+
+        return $this;
+    }
+
+
+
 
 }
