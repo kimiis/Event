@@ -22,44 +22,46 @@ class CreateEventFormType extends AbstractType
         $builder
 
             ->add('title', null, [
-                "label" => "Name of the event : "
+                "label" => "Nom de l'événement : "
             ])
             ->add('campus', EntityType::class, [
                 "class" => Campus::class,
                 "choice_label" => "name",
-                "label" => "Which campus ? : ",
+                "label" => "Quelle ville de Campus ? : ",
             ])
             ->add('dateD', null, [
-                "label" => "When will it begin? : ",
+                "label" => "Quand est-ce que ça va commencer ? : ",
                 'widget' => 'single_text',
 
             ])
             ->add('time', null, [
-                "label" => "How long will it last ? : ",
+                "label" => "Combien de temps ça va durer ? : ",
 
             ])
             ->add('limiteDate', null, [
+                "label" => "Date limite d'inscription : ",
                 'widget' => 'single_text',
 
             ])
             ->add('nbMaxInsc', null, [
-                "label" => " Limite for entries: ",
+                "label" => " Personnes limitées à : ",
 
             ])
             ->add('infosEvent', null, [
-                "label" => " Infomations: ",
+                "label" => " Informations : ",
 
             ])
             ->add('address', TextType::class, [
-                "label" => "address"
+                "label" => "Adresse : "
             ])
             ->add('status', EntityType::class, [
                 "class" => Status::class,
 //                C'est ce qui va se mettre dans ton <select><option>
                 "choice_label" => 'name',
-                "label" => " Status: ",
+                "label" => " Status : ",
             ])
             ->add('create', SubmitType::class, [
+                "label" => "Création",
             ]);
     }
 

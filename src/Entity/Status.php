@@ -64,7 +64,7 @@ class Status
     public function removeEvent(Event $event): static
     {
         if ($this->events->removeElement($event)) {
-            // set the owning side to null (unless already changed)
+            // définir le côté propriétaire sur null (sauf si déjà modifié)
             if ($event->getStatus() === $this) {
                 $event->setStatus(null);
             }

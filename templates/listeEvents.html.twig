@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-    <h1>Liste of events</h1>
+    <h1>Liste des événements</h1>
 {% endblock %}
 
 {% block body %}
     <div class="content">
-        <p> page liste </p>
+        <p> Page liste </p>
 
         {% for event in events %}
             <li>
@@ -33,10 +33,10 @@
                 {#                           value="{% if not event.Users.contains(user) %} Subscribe to event {% else %} Unsubscribe to event {% endif %}"> #}
                 {#                </a> #}
 
-                {% if event.organizer is same as (user) %}
-                    <a href="{{ path('app_eventCanceled', {'event': event.id}) }}">
-                        <input type="button" value="Cancel event"></a>
-                {% endif %}
+{#                {% if event.organizer is same as (user) %}#}
+{#                    <a href="{{ path('app_eventCanceled', {'event': event.id}) }}">#}
+{#                        <input type="button" value="Cancel event"></a>#}
+{#                {% endif %}#}
 
                 </li>
         {% endfor %}

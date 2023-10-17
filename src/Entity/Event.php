@@ -26,7 +26,7 @@ class Event
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\GreaterThan("today UTC")]
-    #[Assert\LessThan(propertyPath:"dateD",message: "trop tard boloss")]
+    #[Assert\LessThan(propertyPath:"dateD",message: "erreur, la date doit être avant celle de début d'évênementx")]
 
     private ?\DateTimeInterface $limiteDate = null;
 

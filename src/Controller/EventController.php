@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Event;
+use App\Entity\Status;
 use App\Entity\User;
 use App\Form\CanceledFormType;
 use App\Form\CreateEventFormType;
@@ -176,4 +178,30 @@ class EventController extends AbstractController
 //        }
 //
 
+//
+    #[Route('/filtre/{status}', name: '_filtre_par_status')]
+    public function filtre_par_status(
+        Status $status,
+        EventRepository $eventRepository
+    ): Response
+    {
+        $events = $eventRepository->findOneBy((array)$status);
+        return $this->render(
+            'event_detail/index.html.twig',
+            compact('events')
+        );
+    }
+
+    #[Route('/filtre/{campus}', name: '_filtre_par_campus')]
+    public function filtre_par_campus(
+        Campus $campus,
+        EventRepository $eventRepository
+    ): Response
+    {
+        $events = $eventRepository->findOneBy((array)$campus);
+        return $this->render(
+            'event_detail/index.html.twig',
+            compact('events')
+        );
+    }
 }

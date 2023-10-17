@@ -13,11 +13,11 @@ class UserProfileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('Email')
             ->add('Nom')
-            ->add('Prenom')
+            ->add('Prénom')
             ->add('Pseudo')
-            ->add('Telephone')
+            ->add('Téléphone')
             ->add('Ajouter', SubmitType::class)
         ;
     }
