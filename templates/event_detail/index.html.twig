@@ -7,12 +7,26 @@
             <p>Event : {{ event.title }}</p>
             <p> Informations : {{ event.infosEvent }}</p>
             <p>Address :{{ event.address }}</p>
-            <p>{{ event.nbMaxInsc}} persons max</p>
-            <p> Time of the event: {{ event.time | date ('H:i')}} </p>
+            <p>{{ event.nbMaxInsc }} persons max</p>
+            <p> Time of the event: {{ event.time | date ('H:i') }} </p>
             <p> Begin : {{ event.dateD | date }}</p>
             <p> Limit of registration : {{ event.limiteDate | date }}</p>
             <p> Status : {{ event.status.name }}</p>
             <p> Organizer : {{ event.organizer.pseudo }}</p>
+
+
+            {#     AJOUT DES PROFILS PARTICIPANTS     #}
+
+            {# Trouver un moyen de ne mettre les participants qu'en une seule ligne et non pas au nombres de lignes de participants #}
+{#            Faire un affichage dans un tableau?#}
+
+            {% for ep in event.users %}
+                {% if event.users.count > 1 %}
+                    <p> Il y a {{ ep.pseudo }} qui participent à l'event!</p>
+                {% else %}
+                    <p> Il y a {{ ep.pseudo }} qui participe à l'event!</p>
+                {% endif %}
+            {% endfor %}
 
 
         </div>

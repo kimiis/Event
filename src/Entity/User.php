@@ -7,11 +7,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Entity\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+#[Vich\Uploadable()]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 #[UniqueEntity(fields: ['Pseudo'], message: 'There is already an account with this pseudo')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -44,6 +48,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(nullable: true)]
     private ?int $Telephone = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageName = null;
+
+    #[ORM\Column(nullable:true)]
+    private ?\DateTimeImmutable $maj =null;
+
+    #[Vich\UploadableField(mapping: 'imageProfil', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
 
     #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'users')]
     private Collection $participant;
@@ -231,5 +244,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getMaj(): ?\DateTimeImmutable
+    {
+        return $this->maj;
+    }
+
+    public function setMaj(?\DateTimeImmutable $maj): void
+    {
+        $this->maj = $maj;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+// Mettre à jour l'image en base de données s'il y a du ré-upload
+        if ($imageFile != null){
+            $this->maj = new \DateTimeImmutable();
+        }
+    }
 
 }

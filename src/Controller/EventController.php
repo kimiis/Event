@@ -33,8 +33,10 @@ class EventController extends AbstractController
         Security        $security,
 
 
+
     ): Response
     {
+
         $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
         $events = $eventRepository->findBy(
 
@@ -44,15 +46,23 @@ class EventController extends AbstractController
             0 //OFFSET -> pagination*/
 
         );
-        return $this->render('listeEvents.html.twig', compact('events', 'user'));
+        return $this->render('listeEvents.html.twig',
+            compact('events','user'));
     }
 
     #[Route('event/detail/{event}', name: '_detail')]
-    public function details(Event $event): Response
+    public function details(
+        Event $event,
+        UserRepository  $userRepository
+
+    ): Response
     {
+        $profils = $userRepository->findBy(
+            [], // WHERE
+        );
         return $this->render(
             'event_detail/index.html.twig',
-            compact('event')
+            compact('event', 'profils')
 
         );
     }

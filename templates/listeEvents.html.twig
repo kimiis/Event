@@ -11,6 +11,7 @@
             <li>
                 <a href="{{ path('_detail',  {'event': event.id}) }}"> {{ event.title }} </a>
 
+
                 {% if event.dateD > "now" | date('Y-m-d') and event.Status.Name is same as ("Open") and event.organizer is not same as (user) %}
 
                     {% if event.Users.contains(user) %}
@@ -28,17 +29,20 @@
 
                 {% endif %}
 
-                {#                <a href="{{ path('_registerForEvent', {'event': event.id}) }}"> #}
-                {#                    <input type="button" #}
-                {#                           value="{% if not event.Users.contains(user) %} Subscribe to event {% else %} Unsubscribe to event {% endif %}"> #}
-                {#                </a> #}
+{#                                <a href="{{ path('_registerForEvent', {'event': event.id}) }}">#}
+{#                                    <input type="button"#}
+{#                                           value="{% if not event.Users.contains(user) %} Subscribe to event {% else %} Unsubscribe to event {% endif %}">#}
+{#                                </a>#}
 
-                {% if event.organizer is same as (user) %}
-                    <a href="{{ path('app_eventCanceled', {'event': event.id}) }}">
-                        <input type="button" value="Cancel event"></a>
-                {% endif %}
+{#                {% if event.organizer is same as (user) %}#}
+{#                    <a href="{{ path('app_eventCanceled', {'event': event.id}) }}">#}
+{#                        <input type="button" value="Cancel event"></a>#}
+{#                {% endif %}#}
 
-                </li>
+            </li>
         {% endfor %}
     </div>
+
+
+
 {% endblock %}
