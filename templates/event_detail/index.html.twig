@@ -14,6 +14,10 @@
             <p> Status : {{ event.status.name }}</p>
             <p> Organizer : {{ event.organizer.pseudo }}</p>
 
+            {% if event.status.name is same as ("Canceled") %}
+            <p>Motif : {{ event.cancellationReason }}</p>
+            {% endif %}
+
 
             {#     AJOUT DES PROFILS PARTICIPANTS     #}
 
