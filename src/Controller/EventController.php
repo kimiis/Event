@@ -18,12 +18,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EventController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/home', name: 'app_home')]
     public function home(): Response
     {
-        return $this->render('main/home.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        return $this->render('main/home.html.twig');
     }
 
     #[Route('/listeEvents', name: 'app_listeEvents')]

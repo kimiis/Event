@@ -6,19 +6,23 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
+use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Vich\UploaderBundle\Entity\File;
+
+use Symfony\Component\HttpFoundation\File\File;
+//use Symfony\Component\Serializer\Annotation\Ignore;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[Vich\Uploadable()]
+#[Vich\Uploadable]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 #[UniqueEntity(fields: ['Pseudo'], message: 'There is already an account with this pseudo')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -55,6 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable:true)]
     private ?\DateTimeImmutable $maj =null;
 
+//    #[Ignore]
     #[Vich\UploadableField(mapping: 'imageProfil', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
@@ -277,5 +282,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->maj = new \DateTimeImmutable();
         }
     }
+
+
+// POUR UPLOADER LES PHOTOS CAR PB SERIALIZABLE
+
+    public function serialize(): string {
+        return serialize([
+            $this->id,
+            $this->Nom,
+            $this->Prenom,
+            $this->Pseudo,
+            $this->Telephone,
+            $this->maj,
+            $this->password,
+            $this->roles,
+            $this->email,
+            $this->imageName,
+            $this->participant,
+            $this->events
+        ]);
+    }
+
+    public function unserialize(string $data)
+    {
+        [
+            $this->id,
+            $this->Nom,
+            $this->Prenom,
+            $this->Pseudo,
+            $this->Telephone,
+            $this->maj,
+            $this->password,
+            $this->roles,
+            $this->email,
+            $this->imageName,
+            $this->participant,
+            $this->events
+        ] = unserialize($data);
+    }
+
 
 }
