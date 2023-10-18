@@ -9,19 +9,13 @@
 
         {% for event in events %}
             <li>
-                <a href="{{ path('_detail',  {'event': event.id}) }}"> Name : {{ event.title }}
-                    Place : {{ event.users.count }}/{{  event.nbMaxInsc }} ,
-                    Status : {{ event.status.name }}, Date of the event {{ event.dateD| date('Y-m-d h:m') }}
-                    Registered?
-                    Actions:
-                    Date limit : {{ event.limiteDate |  date('Y-m-d h:m') }}
-                </a>
+                <a href="{{ path('_detail',  {'event': event.id}) }}"> {{ event.title }} </a>
 
-                {% if event.dateD > "now" | date('Y-m-d') and event.status.name is same as ("Open") and event.organizer is not same as (user) %}
+                {% if event.dateD > "now" | date('Y-m-d') and event.Status.Name is same as ("Open") and event.organizer is not same as (user) %}
 
                     {% if event.Users.contains(user) %}
 
-                        <a href="{{ path('_unRegisterForEvent', {'event': event.id}) }}">
+                        <a href="{{ path('_registerForEvent', {'event': event.id}) }}">
                             <input type="button" value="Unsubscribe to event"></a>
 
                     {% endif %}
@@ -39,10 +33,9 @@
                 {#                           value="{% if not event.Users.contains(user) %} Subscribe to event {% else %} Unsubscribe to event {% endif %}"> #}
                 {#                </a> #}
 
-                {% if event.organizer is same as (user) and event.status.name is same as ("Open") %}
+                {% if event.organizer is same as (user) %}
                     <a href="{{ path('app_eventCanceled', {'event': event.id}) }}">
-                        <input type="button" value="Cancel event" id="cancelButton">
-                    </a>
+                        <input type="button" value="Cancel event"></a>
                 {% endif %}
 
                 </li>

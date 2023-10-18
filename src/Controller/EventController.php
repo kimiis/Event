@@ -105,92 +105,75 @@ class EventController extends AbstractController
 //        user co
         $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
 
-//        je verifie l'event est en open, si la date limite d'inscription est bien après la date actuelle, si le nombre d'inscrit est inférieur au nombre max d'inscription.
+//add
 
-        if ($user && $event->getStatus()->getName() !== "Open" || $event->getLimiteDate() < new \DateTime() || $event->getNbMaxInsc() <= $event->getUsers()->count()
-            || !$event->getUsers()->contains($user)) {
+        if (!$event) {
+            throw $this->createNotFoundException('Error 404: page not found');
+//si organisateur essaye de participer
+        } else if ($event->getOrganizer() === $user) {
 
+            throw $this->createNotFoundException("Error 450: Blocked by Windows Parental Controls");
+
+// Si mon nb maxInsc >= à ma liste de user inscrit de l'event alors
+        } else if ($event->getNbMaxInsc() <= $event->getUsers()->count() && !$event->getUsers()->contains($user)) {
+
+            throw $this->createNotFoundException("Error 200: it's ok baby~");
+
+// si status != open
+        } else if ($event->getStatus()->getName() !== "Open") {
+
+            throw $this->createNotFoundException("Error 410: Gone");
+
+//         si la date limite est depassé
+        } else if ($event->getLimiteDate() < new \DateTime()) {
+
+            throw $this->createNotFoundException("It's too late to apologize, yeaaaaah yeah yeah ~");
+
+//            si l'user n'est pas sur la liste des user de l'event alors
+        } else if (!$event->getUsers()->contains($user)) {
+
+            // Ajoutez l'utilisateur à la liste des participants de l'événement
             $event->addUser($user);
 
-            $entityManager->persist($event);
-            $entityManager->flush();
-
         } else {
-            throw $this->createNotFoundException('Error 404: user not found');
+            $event->removeUser($user);
         }
-
-////add
-//        if (!$event) {
-//            throw $this->createNotFoundException('Error 404: page not found');
-////si organisateur essaye de participer
-//        } else if ($event->getOrganizer() === $user) {
-//
-//            throw $this->createNotFoundException("Error 450: Blocked by Windows Parental Controls");
-//
-//// Si mon nb maxInsc >= à ma liste de user inscrit de l'event alors
-//        } else if ($event->getNbMaxInsc() <= $event->getUsers()->count() && !$event->getUsers()->contains($user)) {
-//
-//            throw $this->createNotFoundException("Error 200: it's ok baby~");
-//
-//// si status != open
-//        } else if ($event->getStatus()->getName() !== "Open") {
-//
-//            throw $this->createNotFoundException("Error 410: Gone");
-//
-////         si la date limite est depassé
-//        } else if ($event->getLimiteDate() < new \DateTime()) {
-//
-//            throw $this->createNotFoundException("It's too late to apologize, yeaaaaah yeah yeah ~");
-//
-////
-//        }
-//            $event->removeUser($user);
-
-        return $this->redirectToRoute('app_listeEvents');
-
-    }
-
-    #[Route('/unRegisterEvent/{event}', name: '_unRegisterForEvent')]
-    public function unRegisterForEvent(
-        EntityManagerInterface $entityManager,
-        Event                  $event,
-        UserRepository         $userRepository,
-        Security               $security
-
-    ): Response
-    {
-        $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
-
-        $event->removeUser($user);
 
         $entityManager->persist($event);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_listeEvents');
+
     }
 
-    #[Route('/canceled/{event}/', name: 'app_eventCanceled')]
-    public function eventCanceled(
-        EntityManagerInterface $entityManager,
-        StatusRepository       $statusRepository,
-        Event                  $event,
-        UserRepository         $userRepository,
-        Security $security
-
-    ): Response
-    {
-        $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
-        if ($event->getOrganizer() === $user) {
-
-            $canceled = $statusRepository->findOneBy(['id' => '5']);
-            $event->setStatus($canceled);
-//je met à jour le status
-            $entityManager->persist($event);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_listeEvents', [], Response::HTTP_SEE_OTHER);
-    }
-
+//    #[Route('/canceled/{event}/', name: 'app_eventCanceled')]
+//    public function eventCanceled(
+//        EntityManagerInterface $entityManager,
+//        StatusRepository       $statusRepository,
+//        Request                $request,
+//        Event                  $event
+//
+//    ): Response
+//    {
+//        $canceled = $statusRepository->findOneBy(['name' => 'Annulé']);
+//        $event->setStatus($canceled);
+//
+//        $canceledForm = $this->createForm(CanceledFormType::class, $canceled);
+//        $canceledForm->handleRequest($request);
+//
+//        if ($canceledForm->isSubmitted() && $canceledForm->isValid()) {
+//
+//            $cancellationReason = $canceledForm->get('cancellationReason')->getData();
+//            $event->setCancellationReason($cancellationReason);
+//
+//            $entityManager->persist($event);
+//            $entityManager->flush();
+//
+//            return $this->redirectToRoute('app_listeEvents', [], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->redirectToRoute('app_listeEvents', compact('canceledForm'));
+//        }
+//
 
 }
