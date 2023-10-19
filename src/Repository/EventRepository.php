@@ -21,6 +21,17 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    public function findRecentEvents()
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.dateD >= :oneMonthAgo')
+            ->setParameter('oneMonthAgo', new \DateTime('-1 month'))
+            ->orderBy('e.dateD', 'ASC')
+            ->setMaxResults(10);
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Event[] Returns an array of Event objects
 //     */

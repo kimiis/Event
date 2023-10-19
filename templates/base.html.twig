@@ -26,11 +26,12 @@
             <ul>
                 <li>
                     <a href="{{ path('app_home') }}" class="nav">Home</a>
-                    <a href="{{ path('app_listeEvents') }}" class="nav">Events</a>
-                    <a href="{{ path('app_create') }}" class="nav">Create event</a>
+
 
                     {% if app.user %}
 
+                        <a href="{{ path('app_listeEvents') }}" class="nav">Events</a>
+                        <a href="{{ path('app_create') }}" class="nav">Create event</a>
                         <a href="{{ path('app_logout') }}">Logout</a>
                         <a href="{{ path('_profil') }}">Profil</a>
 

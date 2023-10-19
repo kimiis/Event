@@ -10,11 +10,13 @@ use App\Repository\EventRepository;
 use App\Repository\StatusRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\Clock\now;
 
 class EventController extends AbstractController
 {
@@ -30,23 +32,17 @@ class EventController extends AbstractController
         UserRepository  $userRepository,
         Security        $security,
 
-
-
     ): Response
     {
-
+//        $currentDate = date("Y-m-d H:i:s");
         $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
-        $events = $eventRepository->findBy(
 
-            [], //WHERE
-            [], //ORDER BY
-            10, //LIMIT
-            0 //OFFSET -> pagination*/
+        $events = $eventRepository->findRecentEvents();
 
-        );
         return $this->render('listeEvents.html.twig',
             compact('events','user'));
     }
+
 
     #[Route('event/detail/{event}', name: '_detail')]
     public function details(
@@ -177,21 +173,24 @@ class EventController extends AbstractController
         return $this->redirectToRoute('app_listeEvents');
     }
 
-    #[Route('/canceled/{event}/', name: 'app_eventCanceled')]
+    #[Route('/canceled/{event}/{reason}', name: 'app_eventCanceled')]
     public function eventCanceled(
         EntityManagerInterface $entityManager,
         StatusRepository       $statusRepository,
         Event                  $event,
         UserRepository         $userRepository,
-        Security $security
+        Security $security,
+        string $reason
 
     ): Response
     {
+
         $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
         if ($event->getOrganizer() === $user) {
 
-            $canceled = $statusRepository->findOneBy(['id' => '5']);
+            $canceled = $statusRepository->findOneBy(['id' => '2']);
             $event->setStatus($canceled);
+            $event->setCancellationReason($reason);
 //je met à jour le status
             $entityManager->persist($event);
             $entityManager->flush();
