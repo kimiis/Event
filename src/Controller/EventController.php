@@ -110,26 +110,26 @@ class EventController extends AbstractController
 //add
 
         if (!$event) {
-            throw $this->createNotFoundException('Error 404: page not found');
+            throw $this->createNotFoundException('Error 404: page non trouvé');
 //si organisateur essaye de participer
         } else if ($event->getOrganizer() === $user) {
 
-            throw $this->createNotFoundException("Error 450: Blocked by Windows Parental Controls");
+            throw $this->createNotFoundException("Error 450: Bloqué par le contrôle parental Windows");
 
 // Si mon nb maxInsc >= à ma liste de user inscrit de l'event alors
         } else if ($event->getNbMaxInsc() <= $event->getUsers()->count() && !$event->getUsers()->contains($user)) {
 
-            throw $this->createNotFoundException("Error 200: it's ok baby~");
+            throw $this->createNotFoundException("Error 200: c'est bon~");
 
 // si status != open
-        } else if ($event->getStatus()->getName() !== "Open") {
+        } else if ($event->getStatus()->getName() !== "Ouvert") {
 
-            throw $this->createNotFoundException("Error 410: Gone");
+            throw $this->createNotFoundException("Error 410: Disparu");
 
 //         si la date limite est depassé
         } else if ($event->getLimiteDate() < new \DateTime()) {
 
-            throw $this->createNotFoundException("It's too late to apologize, yeaaaaah yeah yeah ~");
+            throw $this->createNotFoundException("C'est trop tard pour s'excuser~");
 
 //            si l'user n'est pas sur la liste des user de l'event alors
         } else if (!$event->getUsers()->contains($user)) {

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,9 +16,13 @@ class UserProfileFormType extends AbstractType
         $builder
             ->add('Email')
             ->add('Nom')
-            ->add('Prénom')
+            ->add('Prenom', TextType::class, [
+                'label' => 'Prénom'
+            ])
             ->add('Pseudo')
-            ->add('Téléphone')
+            ->add('Telephone', TextType::class, [
+                'label' => 'Téléphone',
+            ])
             ->add('Ajouter', SubmitType::class)
         ;
     }

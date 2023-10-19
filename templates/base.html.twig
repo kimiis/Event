@@ -5,6 +5,8 @@
     <title>{% block title %}Eni-Sortie{% endblock %}</title>
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <link rel="stylesheet" href="{{ asset('build/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/formCreatEvent.css') }}">
     {% block stylesheets %}
     {% endblock %}
 
@@ -21,33 +23,41 @@
 
     <div class="menuNav">
         <nav class="menu">
-            <ul>
-                <li>
-                    <a href="{{ path('app_home') }}" class="nav">Accueil</a>
-                    <a href="{{ path('app_listeEvents') }}" class="nav">Evénements</a>
-                    <a href="{{ path('app_create') }}" class="nav">Créer un événement</a>
+
+                    <a href="{{ path('app_home') }}" class="nav">
+                        <button class="btn btn-outline btn-accueil">Accueil</button>
+                    </a>
+                    <a href="{{ path('app_listeEvents') }}" class="nav">
+                        <button class="btn btn-outline btn-evenements">Evénements</button>
+                    </a>
+                    <a href="{{ path('app_create') }}" class="nav">
+                        <button class="btn btn-outline btn-creer">Créer un événement</button>
+                    </a>
 
                     {% if app.user %}
 
-                        <a href="{{ path('app_logout') }}">Connection</a>
-                        <a href="{{ path('_profil') }}">Profil</a>
+                        <a href="{{ path('app_logout') }}">
+                            <button class="btn btn-deconnexion">Déconnexion</button>
+                        </a>
+                        <a href="{{ path('_profil') }}">
+                            <button class="btn btn-outline btn-profil">Profil</button>
+                        </a>
 
                     {% endif %}
 
                     {% if not app.user %}
 
-                        <a href="{{ path('app_register') }}">S'enregistrer</a>
-                        <a href="{{ path('app_login') }}">Se connecter</a>
+                        <a href="{{ path('app_register') }}">
+                            <button class="btn btn-outline btn-senregistrer">S'enregistrer</button>
+                        </a>
+                        <a href="{{ path('app_login') }}">
+                            <button class="btn btn-outline btn-seconnecter">Se connecter</button>
+                        </a>
 
                     {% endif %}
 
-                </li>
-
-            </ul>
         </nav>
-
     </div>
-
 
 </header>
 {% block body %}{% endblock %}
