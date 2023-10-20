@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+.contentName {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+
+}
+
+.eventListContent {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.nameContent {
+    grid-column: 1
+}
+
+.statusContent {
+    grid-column: 2;
+}
+
+.placeContent {
+    grid-column: 3;
+}
+
+.dateDContent {
+    grid-column: 4;
+}
+
+.registered {
+    grid-column: 5;
+}
+
+.deadlineContent {
+    grid-column: 6;
+}
+
+.campusContent {
+    grid-column: 7;
+}
+
+.actionsContent {
+    grid-column: 8;
+}
+
+.main-container {
+    background-image: url("/images/logoGSF.png");
+    height: 10rem;
+    background-repeat: no-repeat;
+    background-size: 10rem;
+    background-position-y: -2rem;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+"a1 a2 a3"
+"b1 b2 b3";
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+
+
+.navMenu {
+margin: auto;
+    grid-area: a2/b2/b2/b2;
+
+}
+
+.navMenu a {
+
+    z-index: 5;
+    color: black;
+    text-decoration: none;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 1rem;
+    width: 80px;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:hover {
+    color: #fddb3a;
+}
+
+.navMenu .dot {
+    width: 6px;
+    height: 6px;
+    background: black;
+    border-radius: 50%;
+    opacity: 0;
+    -webkit-transform: translateX(4rem);
+    transform: translateX(4rem);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:nth-child(1):hover ~ .dot {
+    -webkit-transform: translateX(2.8rem);
+    transform: translateX(2.8rem);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.navMenu a:nth-child(2):hover ~ .dot {
+    -webkit-transform: translateX(9.4rem);
+    transform: translateX(9.4rem);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.navMenu a:nth-child(3):hover ~ .dot {
+    -webkit-transform: translateX(19.2rem);
+    transform: translateX(19.2rem);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.navMenu a:nth-child(4):hover ~ .dot {
+    -webkit-transform: translateX(28.4rem);
+    transform: translateX(28.4rem);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.navMenu a:nth-child(5):hover ~ .dot {
+    -webkit-transform: translateX(35.53rem);
+    transform: translateX(35.53rem);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+}

@@ -90,14 +90,12 @@
 
 .bg-start, .bg-figure1, .bg-figure2, .bg-figure3, .bg-figure4{
 
+    z-index: -10;
     background-color: #000000;
-
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
     overflow: hidden;
-
     filter: brightness(25%);
 
 }

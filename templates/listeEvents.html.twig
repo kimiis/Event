@@ -1,21 +1,56 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}
     <h1>Liste of events</h1>
 {% endblock %}
 
 {% block body %}
-    <div class="content">
-        <p> page liste </p>
+
+    <div class="contentName">
+
+        {% set arrayHeader = ["Name", "Status","Place"," Date of the event"," Registered ","Deadline for subscription","Campus","Actions"] %}
+        {% for value in arrayHeader %}
+            <div style="grid-column: {{ loop.index }}; grid-row: 1">
+
+                {{ value }}
+            </div>
+
+        {% endfor %}
 
         {% for event in events %}
-            <li>
-                <a href="{{ path('_detail',  {'event': event.id}) }}"> Name : {{ event.title }}
-                    Place : {{ event.users.count }}/{{  event.nbMaxInsc }} ,
-                    Status : {{ event.status.name }}, Date of the event {{ event.dateD| date('Y-m-d h:m') }}
-                    Registered?
-                    Actions:
-                    Date limit : {{ event.limiteDate |  date('Y-m-d h:m') }}
-                </a>
+
+            {#                name #}
+            <div class="nameContent" style="grid-row:{{ loop.index +1}}">
+                <a href="{{ path('_detail',  {'event': event.id}) }}">{{ event.title }} </a>
+            </div>
+
+            {#                place #}
+            <div class="placeContent" style="grid-row:{{ loop.index +1}}">
+                {{ event.users.count }}/{{ event.nbMaxInsc }}
+            </div>
+
+            {# status  #}
+            <div class="statusContent" style="grid-row:{{ loop.index +1}}">
+                {{ event.status.name }}
+            </div>
+            {#                dateD #}
+            <div class="dateDContent" style="grid-row:{{ loop.index +1}}">
+                {{ event.dateD |  date('Y-m-d h:m') }}
+            </div>
+            {#                Registerd #}
+            <div class="registeredContent" style="grid-row:{{ loop.index +1 }}">
+
+            </div>
+            {#                deadline #}
+            <div class="deadlineContent" style="grid-row:{{ loop.index +1 }}">
+                {{ event.limiteDate|  date('Y-m-d h:m') }}
+            </div>
+            {# campus #}
+            <div class="campusContent" style="grid-row:{{ loop.index +1}}">
+                {{ event.campus.name }}
+            </div>
+            {#                actions #}
+            <div class="actionsContent" style="grid-row:{{ loop.index +1 }}">
 
                 {% if event.dateD > "now" | date('Y-m-d') and event.status.name is same as ("Open") and event.organizer is not same as (user) %}
 
@@ -33,19 +68,21 @@
                     {% endif %}
 
                 {% endif %}
+            </div>
 
-                {#                <a href="{{ path('_registerForEvent', {'event': event.id}) }}"> #}
-                {#                    <input type="button" #}
-                {#                           value="{% if not event.Users.contains(user) %} Subscribe to event {% else %} Unsubscribe to event {% endif %}"> #}
-                {#                </a> #}
-
+            <div class="cancelButton" style="grid-row:{{ loop.index +1 }}">
                 {% if event.organizer is same as (user) and event.status.name is same as ("Open") %}
 
-                        <input name="{{ event.id }}" type="button" value="Cancel event" id="cancelButton">
+                    <input name="{{ event.id }}" type="button" value="Cancel event" id="cancelButton">
 
                 {% endif %}
+            </div>
 
-                </li>
+            {#                <a href="{{ path('_registerForEvent', {'event': event.id}) }}"> #}
+            {#                    <input type="button" #}
+            {#                           value="{% if not event.Users.contains(user) %} Subscribe to event {% else %} Unsubscribe to event {% endif %}"> #}
+            {#                </a> #}
+
         {% endfor %}
     </div>
 {% endblock %}

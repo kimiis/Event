@@ -2,5 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
+.tableListEvent{
+    border: solid ;
+    border-bottom-color: black;
+}
 
