@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Entity\User;
 use App\Form\CanceledFormType;
 use App\Form\CreateEventFormType;
+use App\Repository\CampusRepository;
 use App\Repository\EventRepository;
 use App\Repository\StatusRepository;
 use App\Repository\UserRepository;
@@ -20,7 +21,7 @@ use function Symfony\Component\Clock\now;
 
 class EventController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function home(): Response
     {
         return $this->render('main/home.html.twig');
@@ -40,14 +41,14 @@ class EventController extends AbstractController
         $events = $eventRepository->findRecentEvents();
 
         return $this->render('listeEvents.html.twig',
-            compact('events','user'));
+            compact('events', 'user'));
     }
 
 
     #[Route('event/detail/{event}', name: '_detail')]
     public function details(
-        Event $event,
-        UserRepository  $userRepository
+        Event          $event,
+        UserRepository $userRepository
 
     ): Response
     {
@@ -179,8 +180,8 @@ class EventController extends AbstractController
         StatusRepository       $statusRepository,
         Event                  $event,
         UserRepository         $userRepository,
-        Security $security,
-        string $reason
+        Security               $security,
+        string                 $reason
 
     ): Response
     {
@@ -199,5 +200,16 @@ class EventController extends AbstractController
         return $this->redirectToRoute('app_listeEvents', [], Response::HTTP_SEE_OTHER);
     }
 
-
+//    #[Route('/sortBy/{campus}', name: 'app_sortBy')]
+//    public function sortBy(
+//        CampusRepository $campusRepository,
+//                         $campus
+//
+//    ): Response
+//    {
+//        $campus = $campusRepository->sortByCampus(
+//           $campus
+//        );
+//        return $this->redirectToRoute('app_listeEvents', compact('campus'));
+//    }
 }
