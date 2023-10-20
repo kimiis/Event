@@ -1,9 +1,15 @@
 {% extends "base.html.twig" %}
+
 {% block title %} {{ parent() }} | Home {% endblock %}
 
+ {% block javascripts %}
+     <script src="{{ asset('js/home.js') }}"></script>
+ {% endblock %}
+
+ {% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+ {% endblock %}
+
     {% block body %}
-        <p> Page d'accueil t'as capté</p>
-
-
 
     {% endblock %}

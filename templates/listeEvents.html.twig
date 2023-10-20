@@ -40,9 +40,9 @@
                 {#                </a> #}
 
                 {% if event.organizer is same as (user) and event.status.name is same as ("Open") %}
-{#                    <a href="{{ path('app_eventCanceled', {'event': event.id}) }}">#}
+
                         <input name="{{ event.id }}" type="button" value="Cancel event" id="cancelButton">
-{#                    </a>#}
+
                 {% endif %}
 
                 </li>
