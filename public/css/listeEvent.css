@@ -1,8 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #363537;
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+/*----------------------------------------------Content--------------------------------*/
 .contentName {
+    font-family: "Montserrat", sans-serif;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
+    background-color: #eef0f2;
+    text-align: center;
+    align-items: center;
+
 
 }
 
@@ -11,8 +28,14 @@
     grid-template-columns: repeat(8, 1fr);
 }
 
+a{
+    text-decoration: none;
+    list-style-type: none;
+}
+
 .nameContent {
-    grid-column: 1
+    grid-column: 1;
+
 }
 
 .statusContent {
@@ -43,12 +66,14 @@
     grid-column: 8;
 }
 
+/*------------------------------------------------MENU-----------------------------------------------------------*/
+
 .main-container {
-    background-image: url("/images/logoGSF.png");
+    background-image: url("/images/logoHalloween.png");
     height: 10rem;
     background-repeat: no-repeat;
     background-size: 10rem;
-    background-position-y: -2rem;
+
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -58,29 +83,16 @@
 "b1 b2 b3";
 }
 
-body {
-    font-family: "Montserrat", sans-serif;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-
-}
-
-
 .navMenu {
-margin: auto;
-    grid-area: a2/b2/b2/b2;
+    margin: auto;
+    grid-area: a2 /b2/ b2 / b2;
 
 }
 
 .navMenu a {
 
     z-index: 5;
-    color: black;
+    color: #BA5C12;
     text-decoration: none;
     font-size: 1.2em;
     text-transform: uppercase;
@@ -146,3 +158,114 @@ margin: auto;
     transition: all 0.2s ease-in-out;
     opacity: 1;
 }
+.witch{
+
+}
+/*------------------------------ footer ----------------------*/
+#foreground {
+    height: 400px;
+    position: absolute;
+    margin-top: -200px;
+    overflow-y: hidden;
+}
+
+.moon {
+    left: 25%;
+
+}
+.horseman {
+    width: 184px;
+    height: 123px;
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/horse-hallow5.svg');
+    animation: horsemove 0.7s steps(15) infinite;
+    position: relative;
+    left: 50%;
+    margin-left: -100px;
+    top: 300px;
+}
+
+.pumpkin {
+    position: relative;
+    left: 46%;
+
+}
+
+.ground {
+    width: 100%;
+    height: 697px;
+    position: absolute;
+    background-size: 400px 716px;
+    left: 0;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 400px;
+}
+
+.front {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowfront4.svg') repeat-x;
+    background-size: 400px 871px;
+
+    animation: bk 20s -5s linear infinite;
+}
+
+.frontmid {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowmidfront2.svg') repeat-x;
+    background-size: 400px 871px;
+
+    animation: bk 50s -5s linear infinite;
+}
+
+.mid {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowmid2.svg') repeat-x;
+    background-size: 400px 871px;
+
+    animation: bk 100s -5s linear infinite;
+}
+
+.back {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowback2.svg') repeat-x;
+    background-size: 400px 871px;
+
+    animation: bk 100s -5s linear infinite;
+}
+
+@keyframes horsemove {
+    100% { background-position: 0 -1848px; }
+}
+
+@keyframes bk {
+    100% { background-position: -200% 0; }
+}
+/*------------------------------------------------------Button--------------------------------------------------------------*/
+.btn {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid red;
+    border-radius: 0.6em;
+    color: red;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    &:hover {
+        box-shadow: 0 0 40px 40px red inset;
+    &:hover,
+    &:focus {
+        color: #fff;
+        outline: 0;
+    }}}
+
+
+
+

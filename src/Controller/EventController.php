@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Entity\User;
-use App\Form\CanceledFormType;
 use App\Form\CreateEventFormType;
 use App\Repository\CampusRepository;
 use App\Repository\EventRepository;

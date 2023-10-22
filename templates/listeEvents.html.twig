@@ -6,7 +6,7 @@
 
 {% block body %}
 
-    <div class="contentName">
+    <div class="contentName  md:w-32 lg:w-48" >
 
         {% set arrayHeader = ["Name", "Status","Place"," Date of the event"," Registered ","Deadline for subscription","Campus","Actions"] %}
         {% for value in arrayHeader %}
@@ -20,37 +20,37 @@
         {% for event in events %}
 
             {#                name #}
-            <div class="nameContent" style="grid-row:{{ loop.index +1}}">
+            <div class="nameContent md:w-32 lg:w-48" style="grid-row:{{ loop.index +1}}" >
                 <a href="{{ path('_detail',  {'event': event.id}) }}">{{ event.title }} </a>
             </div>
 
             {#                place #}
-            <div class="placeContent" style="grid-row:{{ loop.index +1}}">
+            <div class="placeContent md:w-32 lg:w-48" style="grid-row:{{ loop.index +1}}">
                 {{ event.users.count }}/{{ event.nbMaxInsc }}
             </div>
 
             {# status  #}
-            <div class="statusContent" style="grid-row:{{ loop.index +1}}">
+            <div class="statusContent md:w-32 lg:w-48" style="grid-row:{{ loop.index +1}}">
                 {{ event.status.name }}
             </div>
             {#                dateD #}
-            <div class="dateDContent" style="grid-row:{{ loop.index +1}}">
+            <div class="dateDContent md:w-32 lg:w-48" style="grid-row:{{ loop.index +1}}">
                 {{ event.dateD |  date('Y-m-d h:m') }}
             </div>
             {#                Registerd #}
-            <div class="registeredContent" style="grid-row:{{ loop.index +1 }}">
+            <div class="registeredContent md:w-32 lg:w-48" style="grid-row:{{ loop.index +1 }}">
 
             </div>
             {#                deadline #}
-            <div class="deadlineContent" style="grid-row:{{ loop.index +1 }}">
+            <div class="deadlineContent md:w-32 lg:w-48" style="grid-row:{{ loop.index +1 }}">
                 {{ event.limiteDate|  date('Y-m-d h:m') }}
             </div>
             {# campus #}
-            <div class="campusContent" style="grid-row:{{ loop.index +1}}">
+            <div class="campusContent md:w-32 lg:w-48" style="grid-row:{{ loop.index +1}}">
                 {{ event.campus.name }}
             </div>
             {#                actions #}
-            <div class="actionsContent" style="grid-row:{{ loop.index +1 }}">
+            <div class="actionsContent md:w-32 lg:w-48" style="grid-row:{{ loop.index +1 }}">
 
                 {% if event.dateD > "now" | date('Y-m-d') and event.status.name is same as ("Open") and event.organizer is not same as (user) %}
 
@@ -68,14 +68,16 @@
                     {% endif %}
 
                 {% endif %}
-            </div>
 
-            <div class="cancelButton" style="grid-row:{{ loop.index +1 }}">
-                {% if event.organizer is same as (user) and event.status.name is same as ("Open") %}
 
-                    <input name="{{ event.id }}" type="button" value="Cancel event" id="cancelButton">
+                <div class="btn md:w-32 lg:w-48" style="grid-row:{{ loop.index +1 }}">
+                    {% if event.organizer is same as (user) and event.status.name is same as ("Open") %}
 
-                {% endif %}
+                        <input name="{{ event.id }}" type="button" value="Cancel event" id="cancelButton">
+
+                    {% endif %}
+                </div>
+
             </div>
 
             {#                <a href="{{ path('_registerForEvent', {'event': event.id}) }}"> #}
@@ -86,3 +88,4 @@
         {% endfor %}
     </div>
 {% endblock %}
+
