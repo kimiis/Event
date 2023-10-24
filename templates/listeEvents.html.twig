@@ -47,7 +47,7 @@
             </div>
             {# campus #}
             <div class="campusContent" style="grid-row:{{ loop.index +1 }}">
-                {{ event.campus.name }}
+                <a href="{{ path('_tri', {'campus': event.campus.id}) }}">{{ event.campus.name }}</a>
             </div>
             {#                actions #}
             <div class="actionsContent" style="grid-row:{{ loop.index +1 }}">
@@ -85,10 +85,10 @@
 
         {% endfor %}
 
-{#        {% for c in campus %}#}
+        {#        {% for c in campus %} #}
 
-{#            <input name="{{ event.c.name }}" type="button" value="Sort By Name" id="sortByName">#}
+        {#            <input name="{{ event.c.name }}" type="button" value="Sort By Name" id="sortByName"> #}
 
-{#        {% endfor %}#}
+        {#        {% endfor %} #}
     </div>
 {% endblock %}
