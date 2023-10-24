@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for tc in triCampus %}
+        <div>
+            {{ tc.name }}
+
+            {% for event in tc.events %}
+                {{ event.title }}
+
+                <a href="{{ path('_detail', {'event': event.id}) }}" >
+                <input name="lienEvent" type="button" value="Details" id="lienEvent">
+                </a>
+
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
