@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PhpParser\Node\Scalar\String_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,16 +33,29 @@ class EventController extends AbstractController
         EventRepository $eventRepository,
         UserRepository  $userRepository,
         Security        $security,
+        CampusRepository $campusRepository,
+        Request          $request
 
     ): Response
     {
+        $tri = $request->get('tri');
+        if ($tri == null) {
+            $campusFilter = $campusRepository->findAll();
+        } else {
+
+            $campusFilter = $campusRepository->findBy(
+                [], //WHERE
+                ["name" => 'DESC'] // ORDER BY
+
+            );
+        }
 //        $currentDate = date("Y-m-d H:i:s");
         $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
 
         $events = $eventRepository->findRecentEvents();
 
         return $this->render('listeEvents.html.twig',
-            compact('events', 'user'));
+            compact('events', 'user', 'campusFilter'));
     }
 
 
@@ -212,4 +226,26 @@ class EventController extends AbstractController
 //        );
 //        return $this->redirectToRoute('app_listeEvents', compact('campus'));
 //    }
+
+    #[Route('/tri/{param}', name: '_tri')]
+    public function tri(
+        string            $param,
+        CampusRepository $campusRepository,
+    ): Response
+    {
+        if ($param == 'name') {
+            $campusFilter = $campusRepository->findBy(
+                [],
+                ["name" => "DESC"]);
+            $cookie = new Cookie('tri', 'name', strtotime("+1 year"));
+        }
+        $response = new Response();
+        $response->headers->setCookie($cookie);
+        $response->send();
+        return $this->redirectToRoute('app_listeEvents',
+            compact('campusFilter')
+        );
+    }
+
+
 }
