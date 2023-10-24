@@ -25,9 +25,6 @@ class Place
     #[ORM\Column(nullable: true)]
     private ?int $Longitude = null;
 
-    #[ORM\ManyToOne(inversedBy: 'places')]
-    private ?City $Place = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -81,15 +78,5 @@ class Place
         return $this;
     }
 
-    public function getPlace(): ?City
-    {
-        return $this->Place;
-    }
 
-    public function setPlace(?City $Place): static
-    {
-        $this->Place = $Place;
-
-        return $this;
-    }
 }

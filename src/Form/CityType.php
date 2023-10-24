@@ -17,11 +17,11 @@ class CityType extends AbstractType
         $builder
             ->add('name')
             ->add('cityCode')
-            ->add('places', EntityType::class,[
-                "class"=> Place::class,
-                "choice_label" => 'name',
-                "label" => " Place: ",
-            ])
+//            ->add('places', EntityType::class,[
+//                "class"=> Place::class,
+//                "choice_label" => 'name',
+//                "label" => " Place: ",
+//            ])
             ->add('ajouter', SubmitType::class)
         ;
     }
