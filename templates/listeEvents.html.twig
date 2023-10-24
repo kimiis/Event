@@ -20,21 +20,21 @@
         {% for event in events %}
 
             {#                name #}
-            <div class="nameContent" style="grid-row:{{ loop.index +1}}">
+            <div class="nameContent" style="grid-row:{{ loop.index +1 }}">
                 <a href="{{ path('_detail',  {'event': event.id}) }}">{{ event.title }} </a>
             </div>
 
             {#                place #}
-            <div class="placeContent" style="grid-row:{{ loop.index +1}}">
+            <div class="placeContent" style="grid-row:{{ loop.index +1 }}">
                 {{ event.users.count }}/{{ event.nbMaxInsc }}
             </div>
 
             {# status  #}
-            <div class="statusContent" style="grid-row:{{ loop.index +1}}">
+            <div class="statusContent" style="grid-row:{{ loop.index +1 }}">
                 {{ event.status.name }}
             </div>
             {#                dateD #}
-            <div class="dateDContent" style="grid-row:{{ loop.index +1}}">
+            <div class="dateDContent" style="grid-row:{{ loop.index +1 }}">
                 {{ event.dateD |  date('Y-m-d h:m') }}
             </div>
             {#                Registerd #}
@@ -46,7 +46,7 @@
                 {{ event.limiteDate|  date('Y-m-d h:m') }}
             </div>
             {# campus #}
-            <div class="campusContent" style="grid-row:{{ loop.index +1}}">
+            <div class="campusContent" style="grid-row:{{ loop.index +1 }}">
                 {{ event.campus.name }}
             </div>
             {#                actions #}
@@ -84,5 +84,11 @@
             {#                </a> #}
 
         {% endfor %}
+
+{#        {% for c in campus %}#}
+
+{#            <input name="{{ event.c.name }}" type="button" value="Sort By Name" id="sortByName">#}
+
+{#        {% endfor %}#}
     </div>
 {% endblock %}
