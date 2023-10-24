@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use Symfony\Component\HttpFoundation\File\File;
+
 //use Symfony\Component\Serializer\Annotation\Ignore;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -56,8 +57,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageName = null;
 
-    #[ORM\Column(nullable:true)]
-    private ?\DateTimeImmutable $maj =null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $maj = null;
 
 //    #[Ignore]
     #[Vich\UploadableField(mapping: 'imageProfil', fileNameProperty: 'imageName')]
@@ -74,7 +75,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         $this->participant = new ArrayCollection();
         $this->events = new ArrayCollection();
     }
-
 
 
     public function getId(): ?int
@@ -101,7 +101,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -278,7 +278,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     {
         $this->imageFile = $imageFile;
 // Mettre à jour l'image en base de données s'il y a du ré-upload
-        if ($imageFile != null){
+        if ($imageFile != null) {
             $this->maj = new \DateTimeImmutable();
         }
     }
@@ -286,40 +286,85 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
 
 // POUR UPLOADER LES PHOTOS CAR PB SERIALIZABLE
 
-    public function serialize(): string {
-        return serialize([
-            $this->id,
-            $this->Nom,
-            $this->Prenom,
-            $this->Pseudo,
-            $this->Telephone,
-            $this->maj,
-            $this->password,
-            $this->roles,
-            $this->email,
-            $this->imageName,
-            $this->participant,
-            $this->events
+//    public function serialize(): string {
+//        return serialize([
+//            $this->id,
+//            $this->Nom,
+//            $this->Prenom,
+//            $this->Pseudo,
+//            $this->Telephone,
+//            $this->maj,
+//            $this->password,
+//            $this->roles,
+//            $this->email,
+//            $this->imageName,
+//            $this->participant,
+//            $this->events
+//        ]);
+//    }
+
+    public function __serialize(): array
+    {
+        return ([
+            'id' => $this->id,
+            'Nom' => $this->Nom,
+            'Prenom' => $this->Prenom,
+            'Pseudo' => $this->Pseudo,
+            'Telephone' => $this->Telephone,
+            'maj' => $this->maj,
+            'password' => $this->password,
+            'roles' => $this->roles,
+            'email' => $this->email,
+            'imageName' => $this->imageName,
+            'participant' => $this->participant,
+            'events' => $this->events
         ]);
+    }
+
+//    public function unserialize(string $data)
+//    {
+//        [
+//            $this->id,
+//            $this->Nom,
+//            $this->Prenom,
+//            $this->Pseudo,
+//            $this->Telephone,
+//            $this->maj,
+//            $this->password,
+//            $this->roles,
+//            $this->email,
+//            $this->imageName,
+//            $this->participant,
+//            $this->events
+//        ] = unserialize($data);
+//    }
+
+    public function __unserialize(array $data) :void
+    {
+
+            $this->id = $data['id'];
+            $this->Nom= $data['Nom'];
+            $this->Prenom= $data['Prenom'];
+            $this->Pseudo= $data['Pseudo'];
+            $this->Telephone= $data['Telephone'];
+            $this->maj= $data['maj'];
+            $this->password= $data['password'];
+            $this->roles= $data['roles'];
+            $this->email= $data['email'];
+            $this->imageName= $data['imageName'];
+            $this->participant= $data['participant'];
+            $this->events= $data['events'];
+
+    }
+
+
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
     }
 
     public function unserialize(string $data)
     {
-        [
-            $this->id,
-            $this->Nom,
-            $this->Prenom,
-            $this->Pseudo,
-            $this->Telephone,
-            $this->maj,
-            $this->password,
-            $this->roles,
-            $this->email,
-            $this->imageName,
-            $this->participant,
-            $this->events
-        ] = unserialize($data);
+        // TODO: Implement unserialize() method.
     }
-
-
 }

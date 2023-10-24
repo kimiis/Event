@@ -46,8 +46,6 @@ class CampusController extends AbstractController
         $triCampus = $campusRepository->findBy(
             ['name' => $campus->getName()]
         );
-
-
 //        return new JsonResponse($triCampus);
         return $this->render('campus/tri.html.twig',
             compact('triCampus')
