@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block title %}
     <h1>Liste of events</h1>
 {% endblock %}
@@ -90,5 +92,39 @@
         {#            <input name="{{ event.c.name }}" type="button" value="Sort By Name" id="sortByName"> #}
 
         {#        {% endfor %} #}
+
+
+        {#        <div> #}
+
+        {#            <input name="lienCampus" type="button" value="Sort By Campus" id="SortByCampus" > #}
+
+        {#        </div> #}
+
+
+        <div>
+            <select name="Campus" id="Campus">
+                {% for event in events %}
+                    <option value="{{ event.campus.id }}">{{ event.campus.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+{#        <div>#}
+{#            <select name="Campus" id="Campus">#}
+{#                {% for c in events.campus %}#}
+{#                    <option value="{{ c.campus.id }}">{{ c.campus.name }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+
+
     </div>
+
+
 {% endblock %}
+
+
+    {% block javascripts %}
+        <script src="{{ asset('js/campus.js') }}" defer></script>
+    {% endblock %}
