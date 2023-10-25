@@ -25,3 +25,11 @@ searchCampus.addEventListener("change", ()=> {
     window.location.href = "/tri/" + searchCampus.value
 })
 
+// Initialization for ES Users
+import {
+    Input,
+    Ripple,
+    initTE,
+} from "tw-elements";
+
+initTE({ Input, Ripple });
