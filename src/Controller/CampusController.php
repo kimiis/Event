@@ -28,6 +28,7 @@ class CampusController extends AbstractController
         if ($campusForm->isSubmitted() && $campusForm->isValid()) {
             $entityManager->persist($campus);
             $entityManager->flush();
+            $this->addFlash( 'success' ,'Form submitted !');
         }
 
         return $this->render('campus/campus.html.twig',

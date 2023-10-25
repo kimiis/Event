@@ -17,8 +17,8 @@ class PlaceType extends AbstractType
         $builder
             ->add('name')
             ->add('street')
-            ->add('Latitude')
-            ->add('Longitude')
+//            ->add('Latitude')
+//            ->add('Longitude')
 //            ->add('City', EntityType::class,[
 //                "class"=> City::class,
 //                "choice_label" => 'name',

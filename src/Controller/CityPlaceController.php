@@ -31,6 +31,7 @@ class CityPlaceController extends AbstractController
         if ($cityForm ->isSubmitted()&&$cityForm->isValid()){
             $entityManager->persist($city);
             $entityManager->flush();
+            $this->addFlash( 'success' ,'Form submitted !');
         }
 
         return $this->render('city_place/city.html.twig',
@@ -52,6 +53,7 @@ class CityPlaceController extends AbstractController
         if ($placeForm ->isSubmitted()&&$placeForm->isValid()){
             $entityManager->persist($place);
             $entityManager->flush();
+            $this->addFlash( 'success' ,'Form submitted !');
         }
 
         return $this->render('city_place/place.html.twig',

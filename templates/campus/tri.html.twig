@@ -6,14 +6,25 @@
         <div>
             {{ tc.name }}
 
+            {% if tc.events is empty %}
+                <p> No Events Here !</p>
+            {% else %}
+                <p> Here Are Your Campus Events !</p>
+
+            {% endif %}
+
             {% for event in tc.events %}
+
+
+
                 {{ event.title }}
 
-                <a href="{{ path('_detail', {'event': event.id}) }}" >
-                <input name="lienEvent" type="button" value="Details" id="lienEvent">
+                <a href="{{ path('_detail', {'event': event.id}) }}">
+                    <input name="lienEvent" type="button" value="Details" id="lienEvent">
                 </a>
-
             {% endfor %}
+
+
         </div>
     {% endfor %}
 
