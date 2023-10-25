@@ -3,16 +3,15 @@
 .contentName {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-
-}
-
-.eventListContent {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    text-align: center;
+    background-color: antiquewhite;
+    margin: 1rem;
+    align-items: center;
 }
 
 .nameContent {
-    grid-column: 1
+    grid-column: 1;
+    margin: 1rem;
 }
 
 .statusContent {
@@ -44,11 +43,11 @@
 }
 
 .main-container {
-    background-image: url("/images/logoGSF.png");
+    background-image: url("/images/logoHalloween.png");
     height: 10rem;
     background-repeat: no-repeat;
     background-size: 10rem;
-    background-position-y: -2rem;
+    margin-left: 3rem;
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -57,14 +56,16 @@
 "a1 a2 a3"
 "b1 b2 b3";
 }
-
+.cancelButton{
+    color: #cb4603;
+}
 body {
     font-family: "Montserrat", sans-serif;
+    background-color: #363537;
 }
 
 * {
-    margin: 0;
-    padding: 0;
+
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 
@@ -72,15 +73,15 @@ body {
 
 
 .navMenu {
-margin: auto;
-    grid-area: a2/b2/b2/b2;
+    margin: auto;
+    grid-area: a1 /b1/ b2 / a3;
 
 }
 
 .navMenu a {
 
     z-index: 5;
-    color: black;
+    color: #f9a03f;
     text-decoration: none;
     font-size: 1.2em;
     text-transform: uppercase;
@@ -98,7 +99,7 @@ margin: auto;
 .navMenu .dot {
     width: 6px;
     height: 6px;
-    background: black;
+    background: #cb4603;
     border-radius: 50%;
     opacity: 0;
     -webkit-transform: translateX(4rem);
@@ -132,17 +133,119 @@ margin: auto;
 }
 
 .navMenu a:nth-child(4):hover ~ .dot {
-    -webkit-transform: translateX(28.4rem);
-    transform: translateX(28.4rem);
+    -webkit-transform: translateX(448px);
+    transform: translateX(448px);
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
     opacity: 1;
 }
 
 .navMenu a:nth-child(5):hover ~ .dot {
-    -webkit-transform: translateX(35.53rem);
-    transform: translateX(35.53rem);
+    -webkit-transform: translateX(565px);
+    transform: translateX(565px);
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
     opacity: 1;
+}
+
+.navMenu a:nth-child(6):hover ~ .dot {
+    -webkit-transform: translateX(690px);
+    transform: translateX(690px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.navMenu a:nth-child(7):hover ~ .dot {
+    -webkit-transform: translateX(830px);
+    transform: translateX(830px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.navMenu a:nth-child(8):hover ~ .dot {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+}
+
+/*---------------------footer-----------------------*/
+
+#foreground {
+    height: 400px;
+    position: relative;
+    margin-top: -200px;
+    overflow-y: hidden;
+}
+
+
+.moon {
+    left: 25%;
+    position: absolute;
+    top: 100px;
+}
+
+.horseman {
+    width: 184px;
+    height: 123px;
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/horse-hallow5.svg');
+    animation: splashit 0.7s steps(15) infinite;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+
+}
+
+.ground {
+    width: 151%;
+    height: 697px;
+    position: absolute;
+    background-size: 800px 716px;
+    left: 0;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.front {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowfront4.svg') repeat-x;
+    background-size: 400px 871px;
+
+    animation: bk 20s -5s linear infinite;
+}
+
+.frontmid {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowmidfront2.svg') repeat-x;
+    background-size: 400px 871px;
+
+    animation: bk 50s -5s linear infinite;
+}
+
+.mid {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowmid2.svg') repeat-x;
+    background-size: 400px 871px;
+
+    animation: bk 100s -5s linear infinite;
+}
+
+.back {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowback2.svg') repeat-x;
+    background-size: 400px 871px;
+
+    animation: bk 100s -5s linear infinite;
+}
+
+@keyframes splashit {
+    100% {
+        background-position: 0 -1848px;
+    }
+}
+
+@keyframes bk {
+    100% {
+        background-position: -300% 0;
+    }
 }

@@ -17,3 +17,19 @@ function promptCanceled() {
         document.location = `/canceled/${event.target.name}/${encodeURI(reason)}`
     });
 }
+
+let searchCampus = document.getElementById("Campus");
+
+
+searchCampus.addEventListener("change", ()=> {
+    window.location.href = "/tri/" + searchCampus.value
+})
+
+// Initialization for ES Users
+import {
+    Input,
+    Ripple,
+    initTE,
+} from "tw-elements";
+
+initTE({ Input, Ripple });

@@ -34,23 +34,14 @@ class EventController extends AbstractController
         EventRepository $eventRepository,
         UserRepository  $userRepository,
         Security        $security,
+
         CampusRepository $campusRepository,
         Campus           $campus
 
     ): Response
     {
-//        $tri = $request->get('tri');
-//        if ($tri == null) {
-//            $campusFilter = $campusRepository->findAll();
-//        } else {
-//
-//            $campusFilter = $campusRepository->findBy(
-//                [], //WHERE
-//                ["name" => 'DESC'] // ORDER BY
-//
-//            );
-//        }
-//        $currentDate = date("Y-m-d H:i:s");
+
+
         $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
 
         $events = $eventRepository->findRecentEvents();
@@ -60,8 +51,10 @@ class EventController extends AbstractController
         );
 
         return $this->render('listeEvents.html.twig',
+
             compact('events', 'user',
                 'campusFilter'
+
             ));
     }
 
@@ -97,8 +90,8 @@ class EventController extends AbstractController
         $create->setOrganizer($user);
 
 //        set le select à aujourd'hui
-//        $create->setDateD(new \DateTime());
-//        $create->setLimiteDate(new \DateTime());
+        $create->setDateD(new \DateTime());
+        $create->setLimiteDate(new \DateTime());
 
         $createEventForm = $this->createForm(CreateEventFormType::class, $create);
         $createEventForm->handleRequest($request);
@@ -211,7 +204,7 @@ class EventController extends AbstractController
         $user = $userRepository->findOneBy(["email" => $security->getUser()->getUserIdentifier()]);
         if ($event->getOrganizer() === $user) {
 
-            $canceled = $statusRepository->findOneBy(['id' => '2']);
+            $canceled = $statusRepository->findOneBy(['id' => '5']);
             $event->setStatus($canceled);
             $event->setCancellationReason($reason);
 //je met à jour le status
@@ -222,38 +215,7 @@ class EventController extends AbstractController
         return $this->redirectToRoute('app_listeEvents', [], Response::HTTP_SEE_OTHER);
     }
 
-//    #[Route('/sortBy/{campus}', name: 'app_sortBy')]
-//    public function sortBy(
-//        CampusRepository $campusRepository,
-//                         $campus
-//
-//    ): Response
-//    {
-//        $campus = $campusRepository->sortByCampus(
-//           $campus
-//        );
-//        return $this->redirectToRoute('app_listeEvents', compact('campus'));
-//    }
 
-//    #[Route('/tri/{param}', name: '_tri')]
-//    public function tri(
-//        string            $param,
-////        CampusRepository $campusRepository,
-//    ): Response
-//    {
-////        if ($param == 'name') {
-////            $campusFilter = $campusRepository->findBy(
-////                [],
-////                ["name" => "DESC"]);
-////            $cookie = new Cookie('tri', 'name', strtotime("+1 year"));
-////        }
-//        $response = new Response();
-//        $response->headers->setCookie($cookie);
-//        $response->send();
-//        return $this->redirectToRoute('app_listeEvents'
-////            compact('campusFilter')
-//        );
-//    }
 
 
 }
