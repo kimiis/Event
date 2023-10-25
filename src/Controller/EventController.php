@@ -31,10 +31,9 @@ class EventController extends AbstractController
 
     #[Route('/listeEvents', name: 'app_listeEvents')]
     public function listeEvents(
-        EventRepository $eventRepository,
-        UserRepository  $userRepository,
-        Security        $security,
-
+        EventRepository  $eventRepository,
+        UserRepository   $userRepository,
+        Security         $security,
         CampusRepository $campusRepository,
         Campus           $campus
 
@@ -46,16 +45,11 @@ class EventController extends AbstractController
 
         $events = $eventRepository->findRecentEvents();
 
-        $campusFilter = $campusRepository->findAll(
-
-        );
+        $campusFilter = $campusRepository->findAll();
 
         return $this->render('listeEvents.html.twig',
 
-            compact('events', 'user',
-                'campusFilter'
-
-            ));
+            compact('events', 'user', 'campusFilter'));
     }
 
 
@@ -101,7 +95,7 @@ class EventController extends AbstractController
 
             $entityManager->persist($create);
             $entityManager->flush();
-            $this->addFlash( 'success' ,'Form submitted !');
+            $this->addFlash('success', 'Form submitted !');
 
             return $this->redirectToRoute('app_listeEvents', [], Response::HTTP_SEE_OTHER);
 
@@ -214,8 +208,6 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('app_listeEvents', [], Response::HTTP_SEE_OTHER);
     }
-
-
 
 
 }
