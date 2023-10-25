@@ -131,13 +131,20 @@
         {#        </div> #}
 
 
-        {#        <div> #}
-        {#            <select name="Campus" id="Campus"> #}
-        {#                {% for c in events.campus %} #}
-        {#                    <option value="{{ c.campus.id }}">{{ c.campus.name }}</option> #}
-        {#                {% endfor %} #}
-        {#            </select> #}
-        {#        </div> #}
+
+
+        <div>
+            <select name="Campus" id="Campus">
+
+            <optgroup label="Choose Your Campus" >
+                {% for c in campusFilter %}
+                    <option value="{{ c.id }}">{{ c.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+
 
 
     </div>

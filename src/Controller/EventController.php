@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Event;
 use App\Entity\User;
 use App\Form\CanceledFormType;
@@ -34,6 +35,8 @@ class EventController extends AbstractController
         UserRepository  $userRepository,
         Security        $security,
 
+        CampusRepository $campusRepository,
+        Campus           $campus
 
     ): Response
     {
@@ -43,8 +46,15 @@ class EventController extends AbstractController
 
         $events = $eventRepository->findRecentEvents();
 
+        $campusFilter = $campusRepository->findAll(
+
+        );
+
         return $this->render('listeEvents.html.twig',
-            compact('events', 'user'
+
+            compact('events', 'user',
+                'campusFilter'
+
             ));
     }
 
@@ -91,6 +101,7 @@ class EventController extends AbstractController
 
             $entityManager->persist($create);
             $entityManager->flush();
+            $this->addFlash( 'success' ,'Form submitted !');
 
             return $this->redirectToRoute('app_listeEvents', [], Response::HTTP_SEE_OTHER);
 
