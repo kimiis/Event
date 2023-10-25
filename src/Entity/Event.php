@@ -26,12 +26,11 @@ class Event
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\GreaterThan("today UTC")]
-    #[Assert\LessThan(propertyPath:"dateD",message: "trop tard boloss")]
-
+    #[Assert\LessThan(propertyPath: "dateD", message: "trop tard boloss")]
     private ?\DateTimeInterface $limiteDate = null;
 
     #[ORM\Column]
-    #[Assert\GreaterThan(1, message: "c'est pas tinder ici" )]
+    #[Assert\GreaterThan(1, message: "c'est pas tinder ici")]
     private ?int $nbMaxInsc = null;
 
     #[ORM\Column(length: 255)]
@@ -39,9 +38,6 @@ class Event
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?Status $status = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $Address = null;
 
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
@@ -61,6 +57,15 @@ class Event
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cancellationReason = null;
+
+    #[ORM\ManyToOne(inversedBy: 'Event')]
+    private ?Adress $adress = null;
+
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?Place $Place = null;
+
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?City $City = null;
 
 
     public function __construct()
@@ -146,17 +151,6 @@ class Event
         return $this;
     }
 
-    public function getAddress(): ?string
-    {
-        return $this->Address;
-    }
-
-    public function setAddress(string $Address): static
-    {
-        $this->Address = $Address;
-
-        return $this;
-    }
 
     public function getTime(): ?\DateTimeInterface
     {
@@ -233,7 +227,41 @@ class Event
         return $this;
     }
 
+    public function getAdress(): ?Adress
+    {
+        return $this->adress;
+    }
 
+    public function setAdress(?Adress $adress): static
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getPlace(): ?Place
+    {
+        return $this->Place;
+    }
+
+    public function setPlace(?Place $Place): static
+    {
+        $this->Place = $Place;
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->City;
+    }
+
+    public function setCity(?City $City): static
+    {
+        $this->City = $City;
+
+        return $this;
+    }
 
 
 }

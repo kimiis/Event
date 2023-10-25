@@ -5,7 +5,9 @@ namespace App\Form;
 use App\Entity\Address;
 use App\Entity\Adress;
 use App\Entity\Campus;
+use App\Entity\City;
 use App\Entity\Event;
+use App\Entity\Place;
 use App\Entity\Status;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -50,9 +52,18 @@ class CreateEventFormType extends AbstractType
                 "label" => " Infomations: ",
 
             ])
-            ->add('address', TextType::class, [
-                "label" => "address"
+            ->add('adress', EntityType::class, [
+                "class" => Adress::class,
+                "choice_label"=> "name",
+                "label" => "City"
             ])
+//
+//            ->add('Place', EntityType::class, [
+//                "class" => Place::class,
+//                "choice_label"=> "name",
+//                "label" => "Place Address"
+//            ])
+
             ->add('status', EntityType::class, [
                 "class" => Status::class,
 //                C'est ce qui va se mettre dans ton <select><option>
