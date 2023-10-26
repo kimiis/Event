@@ -5,8 +5,12 @@ namespace App\Form;
 use App\Entity\Address;
 use App\Entity\Adress;
 use App\Entity\Campus;
+use App\Entity\City;
 use App\Entity\Event;
+use App\Entity\Place;
 use App\Entity\Status;
+use App\Repository\PlaceRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -50,9 +54,16 @@ class CreateEventFormType extends AbstractType
                 "label" => " Infomations: ",
 
             ])
-            ->add('address', TextType::class, [
-                "label" => "address"
+
+            ->add('Place', EntityType::class, [
+                "class" => Place::class,
+                "label" => "Place Address",
+                "query_builder"=>function(EntityRepository $entityRepository){
+                return $entityRepository->createQueryBuilder('p')
+                    ->orderBy('p.name', 'ASC');
+                }
             ])
+
             ->add('status', EntityType::class, [
                 "class" => Status::class,
 //                C'est ce qui va se mettre dans ton <select><option>
