@@ -42,6 +42,10 @@ class Place
         $this->events = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->city->getName() . " - " . $this->name . ", " . $this->street;
+    }
 
     public function getId(): ?int
     {

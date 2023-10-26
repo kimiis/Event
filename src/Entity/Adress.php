@@ -18,11 +18,11 @@ class Adress
     #[ORM\Column(length: 255)]
     private ?string $street = null;
 
-    #[ORM\Column(length: 255)]
+ /*   #[ORM\Column(length: 255)]
     private ?string $city = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $city_code = null;
+    private ?string $city_code = null;*/
 
     #[ORM\Column(nullable: true)]
     private ?int $latitude = null;
@@ -61,29 +61,29 @@ class Adress
         return $this;
     }
 
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): static
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getCityCode(): ?string
-    {
-        return $this->city_code;
-    }
-
-    public function setCityCode(string $city_code): static
-    {
-        $this->city_code = $city_code;
-
-        return $this;
-    }
+//    public function getCity(): ?string
+//    {
+//        return $this->city;
+//    }
+//
+//    public function setCity(string $city): static
+//    {
+//        $this->city = $city;
+//
+//        return $this;
+//    }
+//
+//    public function getCityCode(): ?string
+//    {
+//        return $this->city_code;
+//    }
+//
+//    public function setCityCode(string $city_code): static
+//    {
+//        $this->city_code = $city_code;
+//
+//        return $this;
+//    }
 
     public function getLatitude(): ?int
     {
