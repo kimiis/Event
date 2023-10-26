@@ -24,7 +24,6 @@ class CreateEventFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
             ->add('title', null, [
                 "label" => "Name of the event : "
             ])
@@ -54,16 +53,15 @@ class CreateEventFormType extends AbstractType
                 "label" => " Infomations: ",
 
             ])
-
             ->add('Place', EntityType::class, [
                 "class" => Place::class,
                 "label" => "Place Address",
-                "query_builder"=>function(EntityRepository $entityRepository){
-                return $entityRepository->createQueryBuilder('p')
-                    ->orderBy('p.name', 'ASC');
+                "query_builder" => function (EntityRepository $entityRepository) {
+                    return $entityRepository->createQueryBuilder('p')
+//                        ->orderBy('p.city', 'ASC');
+                        ->orderBy('p.name', 'ASC');
                 }
             ])
-
             ->add('status', EntityType::class, [
                 "class" => Status::class,
 //                C'est ce qui va se mettre dans ton <select><option>
