@@ -44,7 +44,7 @@ class Place
 
     public function __toString(): string
     {
-        return $this->city->getName() . " - " . $this->name . ", " . $this->street;
+        return $this->name . ", " . $this->street. " - " . $this->city->getName();
     }
 
     public function getId(): ?int
