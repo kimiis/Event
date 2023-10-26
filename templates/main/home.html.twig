@@ -1,66 +1,70 @@
-{% block javascripts %}
+<!DOCTYPE html>
+<html lang="EN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}HappEvent{% endblock %}</title>
     <script src="{{ asset('js/home.js') }}"></script>
-{% endblock %}
 
- {% block stylesheets %}
-     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-     <link rel="stylesheet" href="{{ asset('css/homeNav.css') }}">
- {% endblock %}
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homeNav.css') }}">
+</head>
+<body>
+<header>
+    {#    si je créer le %block header c'est pour le faire que dans 1 et une seule page #}
 
-    {% block body %}
-        <header>
-            {#    si je créer le %block header c'est pour le faire que dans 1 et une seule page #}
+    <div class="main-container">
 
-            <div class="main-container">
+        <div class="bat-container" id="bats"></div>
 
-                <div class="bat-container" id="bats"></div>
+        <div class="background bg-start" id="background-container"></div>
 
-                <div class="background bg-start" id="background-container"></div>
+        <audio src="{{ asset('audios/h1.mp3') }}" controls autoplay loop></audio>
 
-                <audio src="{{ asset('audios/h1.mp3') }}" controls autoplay loop></audio>
+        <div class="logo">
+            <img src="{{ asset('images/logoHalloween.png') }}" class="logo" width="900rem">
+        </div>
 
-                <div class="logo">
-                    <img src="{{ asset('images/logoHalloween.png') }}" class="logo" width="900rem">
-                </div>
-
-                <div class="navMenu">
-                    <nav class="menu">
-                        <ul>
-                            <li>
-                                <a href="{{ path('app_home') }}" class="nav">Home</a>
+        <div class="navMenu">
+            <nav class="menu">
+                <ul>
+                    <li>
+                        <a href="{{ path('app_home') }}" class="nav">Home</a>
 
 
-                                {% if app.user %}
+                        {% if app.user %}
 
-                                    <a href="{{ path('app_listeEvents') }}" class="nav">Events</a>
-                                    <a href="{{ path('app_create') }}" class="nav">Create event</a>
-                                    <a href="{{ path('app_logout') }}">Logout</a>
-                                    <a href="{{ path('_profil') }}">Profil</a>
+                            <a href="{{ path('app_listeEvents') }}" class="nav">Events</a>
+                            <a href="{{ path('app_create') }}" class="nav">Create event</a>
+                            <a href="{{ path('app_logout') }}">Logout</a>
+                            <a href="{{ path('_profil') }}">Profil</a>
 
-                                {% endif %}
+                        {% endif %}
 
-                                {% if not app.user %}
+                        {% if not app.user %}
 
-                                    <a href="{{ path('app_register') }}">S'enregistrer</a>
-                                    <a href="{{ path('app_login') }}">Login</a>
+                            <a href="{{ path('app_register') }}">S'enregistrer</a>
+                            <a href="{{ path('app_login') }}">Login</a>
 
-                                {% endif %}
+                        {% endif %}
 
-                            </li>
+                    </li>
 
-                        </ul>
-                    </nav>
+                </ul>
+            </nav>
 
-                </div>
+        </div>
 
-                <div class="fog-container" id="fog-container">
+        <div class="fog-container" id="fog-container">
 
-                    <div class="fog fog-part-1"></div>
-                    <div class="fog fog-part-2"></div>
+            <div class="fog fog-part-1"></div>
+            <div class="fog fog-part-2"></div>
 
-                    <div class="bat-container-spiral hidden" id="bats2"></div>
-                </div>
-            </div>
+            <div class="bat-container-spiral hidden" id="bats2"></div>
+        </div>
+    </div>
 
-        </header>
-    {% endblock %}
+</header>
+
+</body>
+
