@@ -1,26 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-   {{ parent()}} | Liste of events
-{% endblock %}
+{% block title %}{{ parent() }} | Liste of events{% endblock %}
+
+ {% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('css/listEvent.css') }}">
+
+ {% endblock %}
 
  {% block javascripts %}
      <script src="{{ asset('js/campus.js') }}" defer></script>
  {% endblock %}
 
 {% block body %}
-
-    <div>
-        <p> Find By Campus </p>
-
-        <label for="Campus"></label> <select name="Campus" id="Campus">
-
-            <optgroup label="Choose Your Campus">
-                {% for c in campusFilter %}
-                    <option value="{{ c.id }}">{{ c.name }}</option>
-                {% endfor %}
-        </select>
-    </div>
 
     <div class="contentName">
 
@@ -119,9 +110,10 @@
             </div>
 
             <div class="cancelButton" style="grid-row:{{ loop.index +1 }}">
+
                 {% if event.organizer is same as (user) and event.status.name is same as ("Open") %}
 
-                                        <input name="{{ event.id }}" type="button" value="Cancel event" id="cancelButton">
+                    <input name="{{ event.id }}" type="button" value="Cancel event" id="cancelButton">
 
                 {% endif %}
             </div>
@@ -152,6 +144,17 @@
         {#                    {% endfor %} #}
         {#            </select> #}
         {#        </div> #}
+    </div>
+    <div>
+
+        <h1>Find by campus</h1>
+        <label for="Campus"></label>
+        <select name="Campus" id="Campus">
+            <optgroup label="Choose Your Campus">
+                {% for c in campusFilter %}
+                    <option value="{{ c.id }}">{{ c.name }}</option>
+                {% endfor %}
+        </select>
     </div>
 {% endblock %}
 

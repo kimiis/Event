@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+body {
+    background-image: url("https://img.freepik.com/vecteurs-libre/fond-halloween-vieilles-pierres-tombales-cimetiere-arbres-sans-feuilles-fantasmagoriques-pleine-lune-illustration-realiste-ciel-nocturne_1284-65419.jpg?w=1480&t=st=1698394845~exp=1698395445~hmac=59957094aafd32dcab7aa74cf5029f915b9a1976bcaa06d337425833219e18c2");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.contentName {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    text-align: center;
+    background-color: antiquewhite;
+    margin: 1rem;
+    align-items: center;
+}
+
+.nameContent {
+    grid-column: 1;
+    margin: 1rem;
+}
+
+.statusContent {
+    grid-column: 2;
+}
+
+.placeContent {
+    grid-column: 3;
+}
+
+.dateDContent {
+    grid-column: 4;
+}
+
+.registered {
+    grid-column: 5;
+}
+
+.deadlineContent {
+    grid-column: 6;
+}
+
+.campusContent {
+    grid-column: 7;
+}
+
+.actionsContent {
+    grid-column: 8;
+}
+
+
+
+/*------------------------------------Liste campus*/
+h1{
+    color: #cb4603;
+}

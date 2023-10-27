@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Entity\User;
 use App\Form\UserProfileFormType;
+use App\Repository\EventRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
@@ -18,7 +20,9 @@ class UserProfileController extends AbstractController
     public function modifyProfile(
         Request                $request,
         EntityManagerInterface $entityManager,
-        UserRepository $userRepository
+        UserRepository         $userRepository,
+        EventRepository        $eventRepository,
+        Event          $event,
 
     ): Response
     {
@@ -34,11 +38,13 @@ class UserProfileController extends AbstractController
 
             return $this->redirectToRoute('_profil');
         }
-
+//        $events = $eventRepository->findBy(
+//            ['organizer' => get_current_user()]
+//        );
 
         return $this->render(
             'profil/profil.html.twig',
-            compact('modifyProfileForm')
+            compact('modifyProfileForm' )
         );
     }
 }

@@ -1,46 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
-
-.contentName {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    text-align: center;
-    background-color: antiquewhite;
-    margin: 1rem;
-    align-items: center;
-}
-
-.nameContent {
-    grid-column: 1;
-    margin: 1rem;
-}
-
-.statusContent {
-    grid-column: 2;
-}
-
-.placeContent {
-    grid-column: 3;
-}
-
-.dateDContent {
-    grid-column: 4;
-}
-
-.registered {
-    grid-column: 5;
-}
-
-.deadlineContent {
-    grid-column: 6;
-}
-
-.campusContent {
-    grid-column: 7;
-}
-
-.actionsContent {
-    grid-column: 8;
-}
 
 .main-container {
     background-image: url("/images/logoHalloween.png");
@@ -56,9 +13,7 @@
 "a1 a2 a3"
 "b1 b2 b3";
 }
-.cancelButton{
-    color: #cb4603;
-}
+
 body {
     font-family: "Montserrat", sans-serif;
     background-color: #363537;
@@ -172,80 +127,6 @@ body {
     opacity: 1;
 }
 
+
 /*---------------------footer-----------------------*/
 
-#foreground {
-    height: 400px;
-    position: relative;
-    margin-top: -200px;
-    overflow-y: hidden;
-}
-
-
-.moon {
-    left: 25%;
-    position: absolute;
-    top: 100px;
-}
-
-.horseman {
-    width: 184px;
-    height: 123px;
-    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/horse-hallow5.svg');
-    animation: splashit 0.7s steps(15) infinite;
-    position: absolute;
-    left: 50%;
-    margin-left: -100px;
-
-}
-
-.ground {
-    width: 151%;
-    height: 697px;
-    position: absolute;
-    background-size: 800px 716px;
-    left: 0;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-}
-
-.front {
-    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowfront4.svg') repeat-x;
-    background-size: 400px 871px;
-
-    animation: bk 20s -5s linear infinite;
-}
-
-.frontmid {
-    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowmidfront2.svg') repeat-x;
-    background-size: 400px 871px;
-
-    animation: bk 50s -5s linear infinite;
-}
-
-.mid {
-    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowmid2.svg') repeat-x;
-    background-size: 400px 871px;
-
-    animation: bk 100s -5s linear infinite;
-}
-
-.back {
-    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/hallowback2.svg') repeat-x;
-    background-size: 400px 871px;
-
-    animation: bk 100s -5s linear infinite;
-}
-
-@keyframes splashit {
-    100% {
-        background-position: 0 -1848px;
-    }
-}
-
-@keyframes bk {
-    100% {
-        background-position: -300% 0;
-    }
-}
