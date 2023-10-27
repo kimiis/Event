@@ -14,7 +14,7 @@ class CampusType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('ajouter', SubmitType::class)
+            ->add('Add', SubmitType::class)
         ;
     }
 

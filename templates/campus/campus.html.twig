@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div>
+    <div  class="card" id="cardEffect">
         {{form(campusForm) }}
     </div>
 
     {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
+        <div id="msg" class="alert alert-success">
             {{ message }}
         </div>
     {% endfor %}

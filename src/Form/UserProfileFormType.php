@@ -29,7 +29,7 @@ class UserProfileFormType extends AbstractType
                 'download_uri' => false,
                 'asset_helper' => true
             ])
-            ->add('Ajouter', SubmitType::class)
+            ->add('Modify', SubmitType::class)
         ;
     }
 

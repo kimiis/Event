@@ -3,7 +3,7 @@
 
     {% block body %}
 
-        <div>
+        <div class="card">
             <p>Event : {{ event.title }}</p>
             <p> Informations : {{ event.infosEvent }}</p>
             <p>Address : {{ event.Place }}</p>
@@ -13,24 +13,29 @@
             <p> Limit of registration : {{ event.limiteDate | date }}</p>
             <p> Status : {{ event.status.name }}</p>
             <p> Organizer : {{ event.organizer.pseudo }}</p>
+            <p> Participant: {{ event.users.count }}
+                {% for ep in event.users %}
+                    <p> Il y a {{ ep.pseudo }} qui participe à l'event!</p>
+                {% endfor %}
+            </p>
 
             {% if event.status.name is same as ("Canceled") %}
-            <p>Motif : {{ event.cancellationReason }}</p>
+                <p>Motif : {{ event.cancellationReason }}</p>
             {% endif %}
 
 
             {#     AJOUT DES PROFILS PARTICIPANTS     #}
 
             {# Trouver un moyen de ne mettre les participants qu'en une seule ligne et non pas au nombres de lignes de participants #}
-{#            Faire un affichage dans un tableau?#}
+            {#            Faire un affichage dans un tableau? #}
 
-            {% for ep in event.users %}
-                {% if event.users.count > 1 %}
-{#                    <p> Il y a {{ ep.pseudo }} qui participent à l'event!</p>#}
-{#                {% else %}#}
-                    <p> Il y a {{ ep.pseudo }} qui participe à l'event!</p>
-                {% endif %}
-            {% endfor %}
+            {#            {% for ep in event.users %} #}
+            {#                {% if event.users.count > 1 %} #}
+            {#                    <p> Il y a {{ ep.pseudo }} qui participent à l'event!</p> #}
+            {#                {% else %} #}
+            {#                    <p> Il y a {{ ep.pseudo }} qui participe à l'event!</p> #}
+            {#                {% endif %} #}
+            {#            {% endfor %} #}
 
 
         </div>
