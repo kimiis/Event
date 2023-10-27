@@ -25,7 +25,7 @@ class PlaceType extends AbstractType
                 "choice_label" => "name",
                 "label" => "City"
             ])
-            ->add('Ajouter', SubmitType::class);
+            ->add('Add', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

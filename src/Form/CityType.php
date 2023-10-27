@@ -22,7 +22,7 @@ class CityType extends AbstractType
 //                "choice_label" => 'name',
 //                "label" => " Place: ",
 //            ])
-            ->add('ajouter', SubmitType::class)
+            ->add('Add', SubmitType::class)
         ;
     }
 

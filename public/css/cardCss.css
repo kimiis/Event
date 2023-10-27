@@ -1,0 +1,141 @@
+.card {
+
+
+    background-color: #BA5C12;
+    border-radius: 10px;
+    width: 500px;
+    padding: 20px;
+    display: block;
+    /*display: grid;*/
+    /*grid-template-columns: auto auto auto;*/
+    /*grid-template-areas: 'a1 a2 a3';*/
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+
+#cardEffect:hover {
+
+
+    background-color: rgba(210, 105, 30, 0.25);
+    transform: scale(1.1);
+    box-shadow: 0px 0px 50px 0px rgb(239, 157, 16);
+
+
+}
+
+#campus_Add {
+    font-family: "Bookman Old Style";
+    color: #f9a03f;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+#place_Add {
+    font-family: "Bookman Old Style";
+    color: #f9a03f;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+#city_Add {
+    font-family: "Bookman Old Style";
+    color: #f9a03f;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+#city_Add {
+    font-family: "Bookman Old Style";
+    color: #f9a03f;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+#user_profile_form_Modify {
+    font-family: "Bookman Old Style";
+    color: #f9a03f;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+#create_event_form_create {
+    font-family: "Bookman Old Style";
+    color: #f9a03f;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+#campus_name {
+    /*grid-area: auto;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#place_name, #place_street, #place_city  {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#city_cityCode, #city_name  {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#user_profile_form_email, #user_profile_form_Nom, #user_profile_form_Prenom, #user_profile_form_Pseudo, #user_profile_form_Telephone, #user_profile_form_imageFile_file {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#create_event_form_title, #create_event_form_campus, #create_event_form_dateD, #create_event_form_limiteDate, #create_event_form_nbMaxInsc,#create_event_form_infosEvent, #create_event_form_Place, #create_event_form_status {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#create_event_form_time{
+    display: flex;
+   justify-content: center;
+ }
+
+label {
+
+display : flex;
+justify-content: space-around;
+    padding-bottom: 2px ;
+    padding-top : 5px ;
+
+
+}
+
+#msg {
+    color: crimson;
+    text-align: center;
+    margin-top: 40px;
+
+
+}
