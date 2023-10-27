@@ -1,0 +1,12 @@
+form {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-areas:"a1 a2 a3";
+}
+
+.buttonCreate{
+    background-color: darkred;
+}
+.title{
+    grid-area: a2;
+}

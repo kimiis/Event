@@ -1,13 +1,47 @@
 {% extends "base.html.twig" %}
 {% block title %} {{ parent() }} | Create {% endblock %}
 
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/create.css') }}">
+    {% endblock %}
+
     {% block body %}
 
+        <div class="card lg:card-side bg-base-100 shadow-xl" style="background-color: #BA5C12; width: 50rem; ">
+            <div class="card-body">
+                <form>
+                    {{ form_start(createEventForm) }}
+                   
+                    <div class="title">
+                        {{ form_row(createEventForm.title) }}
+                    </div>
+                    <div class="dateD">
+                        {{ form_row(createEventForm.dateD) }}
+                    </div>
+                    <div class="campus">
+                        {{ form_row(createEventForm.campus) }}
+                    </div>
+                    <div>
+                        {{ form_row(createEventForm.Place) }}
+                    </div>
+                    <div>
+                        {{ form_row(createEventForm.infosEvent) }}
+                    </div>
+                    <div>
+                        {{ form_row(createEventForm.time) }}
+                    </div>
+                    <div>
+                        {{ form_row(createEventForm.limiteDate) }}
+                    </div>
+                    <div>
+                        {{ form_row(createEventForm.nbMaxInsc) }}
+                    </div>
 
-
-        <div>
-            {{ form(createEventForm) }}
+                    <button class="buttonCreate">   {{ form_row(createEventForm.create) }}</button>
+                </form>
+            </div>
         </div>
+
 
 
         {% for message in app.flashes('success') %}
