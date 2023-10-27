@@ -91,14 +91,14 @@
     margin-right: auto;
 }
 
-#place_name, #place_street, #place_city  {
+#place_name, #place_street, #place_city {
 
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-#city_cityCode, #city_name  {
+#city_cityCode, #city_name {
 
     display: block;
     margin-left: auto;
@@ -111,31 +111,52 @@
     margin-right: auto;
 }
 
-#create_event_form_title, #create_event_form_campus, #create_event_form_dateD, #create_event_form_limiteDate, #create_event_form_nbMaxInsc,#create_event_form_infosEvent, #create_event_form_Place, #create_event_form_status {
+#create_event_form_title, #create_event_form_campus, #create_event_form_dateD, #create_event_form_limiteDate, #create_event_form_nbMaxInsc, #create_event_form_infosEvent, #create_event_form_Place, #create_event_form_status {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-#create_event_form_time{
+#create_event_form_time {
     display: flex;
-   justify-content: center;
- }
+    justify-content: center;
+}
 
 label {
 
-display : flex;
-justify-content: space-around;
-    padding-bottom: 2px ;
-    padding-top : 5px ;
-
-
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 2px;
+    padding-top: 5px;
 }
 
 #msg {
     color: crimson;
     text-align: center;
     margin-top: 40px;
+}
 
+.fbc {
+    color: #BA5C12;
+}
 
+h1 {
+    color: #f9a03f;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#lienEvent {
+
+    color: #f9a03f;
+    background-color: chocolate;
+    border-radius: 10px;
+    margin-left: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
 }

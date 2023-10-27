@@ -5,13 +5,34 @@
  {% block stylesheets %}
      <link rel="stylesheet" href="{{ asset('css/listEvent.css') }}">
 
+
+{% block title %}
+    <h1>Liste of events</h1>
+{% endblock %}
+
+{% block body %}
+
+
  {% endblock %}
+
 
  {% block javascripts %}
      <script src="{{ asset('js/campus.js') }}" defer></script>
  {% endblock %}
 
 {% block body %}
+
+    <div class="fbc">
+        <p> Find By Campus </p>
+
+        <select name="Campus" id="Campus">
+
+            <optgroup label="Choose Your Campus">
+                {% for c in campusFilter %}
+                    <option value="{{ c.id }}">{{ c.name }}</option>
+                {% endfor %}
+        </select>
+    </div>
 
     <div class="contentName">
 
@@ -145,16 +166,6 @@
         {#            </select> #}
         {#        </div> #}
     </div>
-    <div>
 
-        <h1>Find by campus</h1>
-        <label for="Campus"></label>
-        <select name="Campus" id="Campus">
-            <optgroup label="Choose Your Campus">
-                {% for c in campusFilter %}
-                    <option value="{{ c.id }}">{{ c.name }}</option>
-                {% endfor %}
-        </select>
-    </div>
 {% endblock %}
 

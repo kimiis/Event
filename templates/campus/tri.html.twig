@@ -3,13 +3,13 @@
 {% block body %}
 
     {% for tc in triCampus %}
-        <div>
-            {{ tc.name }}
+        <div class="card">
+           <h1> {{ tc.name }}</h1>
 
             {% if tc.events is empty %}
-                <p> No Events Here !</p>
+                <h2> No Events Here !</h2>
             {% else %}
-                <p> Here Are Your Campus Events !</p>
+                <h2> Here Are Your Campus Events !</h2>
 
             {% endif %}
 
@@ -17,11 +17,13 @@
 
 
 
-                {{ event.title }}
+               <div> {{ event.title }}
 
                 <a href="{{ path('_detail', {'event': event.id}) }}">
-                    <input name="lienEvent" type="button" value="Details" id="lienEvent">
+                    <input name="lienEvent" type="button" value="Details" id="lienEvent" class="lienEvent">
                 </a>
+
+               </div>
             {% endfor %}
 
 
